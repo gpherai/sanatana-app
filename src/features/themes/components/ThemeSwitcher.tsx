@@ -12,7 +12,7 @@ import { Button } from '@/shared/components/ui/Button'
 import { Select } from '@/shared/components/ui/Select'
 
 export function ThemeSwitcher() {
-  const { currentTheme, switchTheme, isSwitching } = useTheme()
+  const { currentTheme, isDark, switchTheme, toggleDarkMode, isSwitching } = useTheme()
   const { data: themes, loading: loadingThemes } = useThemes()
   const [error, setError] = useState<string | null>(null)
 
@@ -68,6 +68,33 @@ export function ThemeSwitcher() {
         disabled={isSwitching}
       />
 
+      <div className="flex items-center justify-between p-4 border border-border rounded-lg bg-card">
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">{isDark ? '🌙' : '☀️'}</span>
+          <div>
+            <div className="text-sm font-medium text-foreground">
+              {isDark ? 'Dark Mode' : 'Light Mode'}
+            </div>
+            <div className="text-xs text-muted-foreground">
+              {isDark ? 'Easier on your eyes' : 'Bright and vibrant'}
+            </div>
+          </div>
+        </div>
+        <button
+          onClick={toggleDarkMode}
+          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+            isDark ? 'bg-primary' : 'bg-muted'
+          }`}
+          aria-label="Toggle dark mode"
+        >
+          <span
+            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+              isDark ? 'translate-x-6' : 'translate-x-1'
+            }`}
+          />
+        </button>
+      </div>
+
       {isSwitching && (
         <div className="text-sm text-muted-foreground animate-pulse">
           Switching theme...
@@ -83,10 +110,10 @@ export function ThemeSwitcher() {
       {currentTheme && (
         <div className="mt-6 p-4 border border-border rounded-lg bg-card">
           <div className="text-sm font-medium text-foreground mb-3">
-            Current Theme: {currentTheme.name}
+            Current Colors: {currentTheme.name} {isDark ? '(Dark)' : '(Light)'}
           </div>
           <div className="grid grid-cols-5 gap-2">
-            {Object.entries(currentTheme.colors).map(([key, value]) => (
+            {Object.entries(isDark && currentTheme.darkColors ? currentTheme.darkColors : currentTheme.colors).map(([key, value]) => (
               <div key={key} className="space-y-1">
                 <div
                   className="h-10 rounded border border-border shadow-sm"

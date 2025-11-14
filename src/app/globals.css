@@ -37,20 +37,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: 15 23 42;
-    --color-foreground: 248 250 252;
-
-    --color-muted: 30 41 59;
-    --color-muted-foreground: 148 163 184;
-
-    --color-card: 30 41 59;
-    --color-card-foreground: 248 250 252;
-
-    --color-border: 51 65 85;
-  }
-}
+/* Dark mode is now handled via JavaScript theme switching */
 
 * {
   border-color: rgb(var(--color-border));

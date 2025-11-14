@@ -7,6 +7,7 @@ export interface Theme {
   id: number
   name: string
   colors: ThemeColors
+  darkColors?: ThemeColors // Optional dark mode variant
   isActive: boolean
   createdAt: Date
   updatedAt: Date
@@ -28,6 +29,7 @@ export interface ThemeColors {
 export interface CreateThemeInput {
   name: string
   colors: ThemeColors
+  darkColors?: ThemeColors
   isActive?: boolean
 }
 

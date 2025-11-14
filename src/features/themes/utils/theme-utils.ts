@@ -51,3 +51,20 @@ export function removeStoredThemeId(): void {
   if (typeof window === 'undefined') return
   localStorage.removeItem('theme-id')
 }
+
+/**
+ * Store dark mode preference in localStorage
+ */
+export function storeDarkMode(isDark: boolean): void {
+  if (typeof window === 'undefined') return
+  localStorage.setItem('dark-mode', isDark.toString())
+}
+
+/**
+ * Get stored dark mode preference from localStorage
+ */
+export function getStoredDarkMode(): boolean | null {
+  if (typeof window === 'undefined') return null
+  const stored = localStorage.getItem('dark-mode')
+  return stored !== null ? stored === 'true' : null
+}

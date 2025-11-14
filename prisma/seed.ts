@@ -223,6 +223,18 @@ async function main() {
           cardForeground: '28 25 23',
           border: '231 229 228',
         },
+        darkColors: {
+          primary: '249 115 22', // Brighter orange for dark
+          secondary: '168 85 247', // Lighter purple
+          accent: '244 114 182', // Lighter pink
+          background: '23 23 23', // Deep dark
+          foreground: '250 250 250',
+          muted: '38 38 38',
+          mutedForeground: '161 161 161',
+          card: '30 30 30',
+          cardForeground: '250 250 250',
+          border: '64 64 64',
+        },
         isActive: true,
       },
     }),
@@ -240,6 +252,18 @@ async function main() {
           card: '255 255 255',
           cardForeground: '31 25 43',
           border: '233 213 255',
+        },
+        darkColors: {
+          primary: '147 51 234', // Brighter purple
+          secondary: '244 114 182', // Lighter pink
+          accent: '251 146 60', // Lighter orange
+          background: '20 15 30', // Deep purple-tinted dark
+          foreground: '245 240 255',
+          muted: '35 25 50',
+          mutedForeground: '150 140 170',
+          card: '28 20 40',
+          cardForeground: '245 240 255',
+          border: '60 45 90',
         },
         isActive: false,
       },
@@ -259,6 +283,18 @@ async function main() {
           cardForeground: '37 23 31',
           border: '251 207 232',
         },
+        darkColors: {
+          primary: '244 114 182', // Brighter pink
+          secondary: '192 132 252', // Lighter purple
+          accent: '253 186 116', // Lighter peach
+          background: '30 15 25', // Deep pink-tinted dark
+          foreground: '255 240 250',
+          muted: '45 25 38',
+          mutedForeground: '180 140 160',
+          card: '38 20 32',
+          cardForeground: '255 240 250',
+          border: '75 45 65',
+        },
         isActive: false,
       },
     }),
@@ -276,6 +312,18 @@ async function main() {
           card: '255 255 255',
           cardForeground: '20 33 25',
           border: '187 247 208',
+        },
+        darkColors: {
+          primary: '74 222 128', // Brighter green
+          secondary: '96 165 250', // Lighter blue
+          accent: '252 211 77', // Lighter gold
+          background: '15 25 18', // Deep green-tinted dark
+          foreground: '240 255 244',
+          muted: '25 40 30',
+          mutedForeground: '140 180 155',
+          card: '20 32 24',
+          cardForeground: '240 255 244',
+          border: '45 70 52',
         },
         isActive: false,
       },
@@ -295,6 +343,18 @@ async function main() {
           cardForeground: '23 31 43',
           border: '186 230 253',
         },
+        darkColors: {
+          primary: '96 165 250', // Brighter blue
+          secondary: '167 139 250', // Lighter purple
+          accent: '34 211 238', // Lighter cyan
+          background: '15 20 30', // Deep blue-tinted dark
+          foreground: '240 248 255',
+          muted: '25 35 50',
+          mutedForeground: '140 160 190',
+          card: '20 28 40',
+          cardForeground: '240 248 255',
+          border: '45 60 85',
+        },
         isActive: false,
       },
     }),
@@ -312,6 +372,18 @@ async function main() {
           card: '255 255 255',
           cardForeground: '41 34 20',
           border: '253 224 71',
+        },
+        darkColors: {
+          primary: '252 211 77', // Brighter gold
+          secondary: '251 146 60', // Lighter orange
+          accent: '248 113 113', // Lighter red
+          background: '30 25 15', // Deep warm dark
+          foreground: '255 250 235',
+          muted: '45 38 22',
+          mutedForeground: '180 160 120',
+          card: '38 32 18',
+          cardForeground: '255 250 235',
+          border: '70 60 35',
         },
         isActive: false,
       },
