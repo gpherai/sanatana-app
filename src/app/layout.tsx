@@ -9,6 +9,7 @@ import './globals.css'
 import { Header } from '@/shared/components/layout/Header'
 import { ErrorBoundary } from '@/shared/components/layout/ErrorBoundary'
 import { ToastProvider } from '@/shared/contexts/ToastContext'
+import { ThemeProvider } from '@/features/themes/context/ThemeContext'
 import { env } from '@/core/config/env'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -27,14 +28,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ErrorBoundary>
-          <ToastProvider>
-            <div className="min-h-screen flex flex-col bg-background text-foreground">
-              <Header />
-              <main className="flex-1">
-                {children}
-              </main>
-            </div>
-          </ToastProvider>
+          <ThemeProvider>
+            <ToastProvider>
+              <div className="min-h-screen flex flex-col bg-background text-foreground">
+                <Header />
+                <main className="flex-1">
+                  {children}
+                </main>
+              </div>
+            </ToastProvider>
+          </ThemeProvider>
         </ErrorBoundary>
       </body>
     </html>

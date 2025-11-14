@@ -7,6 +7,7 @@
 
 import { Container } from '@/shared/components/layout/Container'
 import { Button } from '@/shared/components/ui/Button'
+import { ThemeSwitcher } from '@/features/themes/components/ThemeSwitcher'
 
 export default function SettingsPage() {
   return (
@@ -44,12 +45,7 @@ export default function SettingsPage() {
 
           <div className="bg-card border border-border rounded-lg p-6">
             <h2 className="text-xl font-semibold text-foreground mb-4">Themes</h2>
-            <p className="text-muted-foreground">
-              Customize the appearance of your calendar.
-            </p>
-            <Button variant="outline" className="mt-4">
-              Manage Themes
-            </Button>
+            <ThemeSwitcher />
           </div>
         </div>
       </div>

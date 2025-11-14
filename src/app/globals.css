@@ -32,6 +32,9 @@
   --gradient-to: 234 88 12; /* Darker orange */
 
   --radius: 0.75rem;
+
+  /* Smooth color transitions for theme switching */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,6 +60,15 @@ body {
   background-color: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
   font-feature-settings: "rlig" 1, "calt" 1;
+  /* Smooth transitions for theme changes */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply smooth color transitions to all elements for theme switching */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 
 /* Custom scrollbar */
