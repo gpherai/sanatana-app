@@ -51,10 +51,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ref={ref}
             id={selectId}
             className={cn(
-              'w-full px-3 py-2 border rounded-lg transition-colors appearance-none',
+              'w-full px-3 py-2.5 border rounded-lg transition-colors appearance-none',
+              'text-base font-medium text-foreground bg-card',
               'focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
               'disabled:opacity-50 disabled:cursor-not-allowed',
-              'bg-background',
               error
                 ? 'border-red-500 focus:ring-red-500'
                 : 'border-border focus:ring-primary',
@@ -65,7 +65,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             {...props}
           >
             {placeholder && (
-              <option value="" disabled>
+              <option value="" disabled className="text-muted-foreground">
                 {placeholder}
               </option>
             )}
@@ -74,6 +74,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                 key={option.value}
                 value={option.value}
                 disabled={option.disabled}
+                className="text-foreground bg-card"
               >
                 {option.icon ? `${option.icon} ${option.label}` : option.label}
               </option>

@@ -9,9 +9,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/shared/utils/cn'
 import { env } from '@/core/config/env.client'
+import { useTheme } from '@/features/themes/context/ThemeContext'
 
 export function Header() {
   const pathname = usePathname()
+  const { isDark, toggleDarkMode } = useTheme()
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -64,6 +66,18 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+              aria-label="Toggle dark mode"
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              <span className="text-2xl">
+                {isDark ? '🌙' : '☀️'}
+              </span>
+            </button>
+
             <span className="hidden sm:inline-flex text-xs text-muted-foreground px-3 py-1 bg-muted/50 rounded-full">
               v{env.NEXT_PUBLIC_APP_VERSION}
             </span>
