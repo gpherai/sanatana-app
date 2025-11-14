@@ -16,7 +16,8 @@ export async function GET(request: NextRequest) {
 
     // Check for upcoming events query
     if (searchParams.get('upcoming') === 'true') {
-      const limit = parseInt(searchParams.get('limit') || '10')
+      const limitParam = parseInt(searchParams.get('limit') || '10')
+      const limit = Number.isFinite(limitParam) && limitParam > 0 ? limitParam : 10
       const events = await eventService.getUpcomingEvents(limit)
       return success(events)
     }

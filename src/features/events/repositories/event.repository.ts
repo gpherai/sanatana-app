@@ -35,6 +35,7 @@ export class EventRepository extends BaseRepository<Event> {
 
   async findWithFilters(filters: EventFilters): Promise<Event[]> {
     const where: Prisma.EventWhereInput = {}
+    const andConditions: Prisma.EventWhereInput[] = []
 
     if (filters.eventTypes && filters.eventTypes.length > 0) {
       where.eventType = { in: filters.eventTypes }
@@ -47,27 +48,35 @@ export class EventRepository extends BaseRepository<Event> {
     if (filters.startDate && filters.endDate) {
       const start = new Date(filters.startDate)
       const end = new Date(filters.endDate)
-      where.OR = [
-        {
-          AND: [
-            { startDate: { lte: end } },
-            { endDate: { gte: start } }
-          ]
-        },
-        {
-          AND: [
-            { startDate: { gte: start } },
-            { startDate: { lte: end } }
-          ]
-        }
-      ]
+      andConditions.push({
+        OR: [
+          {
+            AND: [
+              { startDate: { lte: end } },
+              { endDate: { gte: start } }
+            ]
+          },
+          {
+            AND: [
+              { startDate: { gte: start } },
+              { startDate: { lte: end } }
+            ]
+          }
+        ]
+      })
     }
 
     if (filters.searchQuery) {
-      where.OR = [
-        { title: { contains: filters.searchQuery, mode: 'insensitive' } },
-        { description: { contains: filters.searchQuery, mode: 'insensitive' } }
-      ]
+      andConditions.push({
+        OR: [
+          { title: { contains: filters.searchQuery, mode: 'insensitive' } },
+          { description: { contains: filters.searchQuery, mode: 'insensitive' } }
+        ]
+      })
+    }
+
+    if (andConditions.length > 0) {
+      where.AND = andConditions
     }
 
     if (filters.isRecurring !== undefined) {

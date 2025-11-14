@@ -8,7 +8,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/shared/utils/cn'
-import { env } from '@/core/config/env'
+import { env } from '@/core/config/env.client'
 
 export function Header() {
   const pathname = usePathname()

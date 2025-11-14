@@ -15,7 +15,7 @@ import { useUpcomingEvents } from '@/features/events/hooks/useEvents'
 import { Event } from '@/features/events/types/event.types'
 import { toDisplayDate } from '@/shared/utils/date.utils'
 import { EVENT_TYPES, EVENT_COLORS } from '@/core/config/constants'
-import { env } from '@/core/config/env'
+import { env } from '@/core/config/env.client'
 
 export default function HomePage() {
   const { data: events, loading, error } = useUpcomingEvents(10)

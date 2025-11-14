@@ -91,6 +91,13 @@ export function useEventMutations() {
         method: 'DELETE'
       })
 
+      // 204 No Content means success but no response body
+      if (response.status === 204) {
+        setDeleteState({ loading: false, error: null, success: true })
+        showSuccess('Event deleted successfully')
+        return true
+      }
+
       const data = await response.json()
 
       if (!response.ok || !data.success) {

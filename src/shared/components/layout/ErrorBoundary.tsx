@@ -9,7 +9,7 @@ import { Component, ReactNode } from 'react'
 import { Button } from '@/shared/components/ui/Button'
 import { Container } from './Container'
 import { logger } from '@/core/lib/logger'
-import { isDevelopment } from '@/core/config/env'
+import { isDevelopment } from '@/core/config/env.client'
 
 interface Props {
   children: ReactNode
