@@ -3,9 +3,11 @@
  * Structured logging for development and production
  */
 
-import { isDevelopment, isProduction } from '@/core/config/env'
-
 type LogLevel = 'debug' | 'info' | 'warn' | 'error'
+
+// Helper functions using process.env.NODE_ENV (safe for both client and server)
+const isDevelopment = () => process.env.NODE_ENV === 'development'
+const isProduction = () => process.env.NODE_ENV === 'production'
 
 interface LogEntry {
   level: LogLevel
