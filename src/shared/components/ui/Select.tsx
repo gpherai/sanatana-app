@@ -13,7 +13,7 @@ interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'chi
   label?: string
   error?: string
   helperText?: string
-  options: SelectOption[]
+  options: readonly SelectOption[]
   placeholder?: string
 }
 

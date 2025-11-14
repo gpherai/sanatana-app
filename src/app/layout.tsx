@@ -16,7 +16,6 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: env.NEXT_PUBLIC_APP_NAME,
   description: 'Hindu calendar for tracking Sanatana Dharma events, festivals, and lunar phases',
-  version: env.NEXT_PUBLIC_APP_VERSION
 }
 
 export default function RootLayout({

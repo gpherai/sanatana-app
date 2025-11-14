@@ -12,9 +12,9 @@ const eventColorValues = EVENT_COLORS.map(c => c.value) as [string, ...string[]]
 export const createCategorySchema = z.object({
   name: z.string().min(1, 'Name is required').max(100, 'Name must be less than 100 characters'),
   description: z.string().max(500, 'Description must be less than 500 characters').optional(),
-  color: z.enum(eventColorValues, { required_error: 'Color is required' }),
+  color: z.enum(eventColorValues, { message: 'Color is required' }),
   icon: z.string().min(1, 'Icon is required'),
-  defaultEventType: z.enum(eventTypeValues, { required_error: 'Default event type is required' })
+  defaultEventType: z.enum(eventTypeValues, { message: 'Default event type is required' })
 })
 
 export const updateCategorySchema = z.object({

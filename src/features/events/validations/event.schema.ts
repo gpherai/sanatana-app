@@ -19,7 +19,7 @@ export const lunarDateSchema = z.object({
 export const createEventSchema = z.object({
   title: z.string().min(1, 'Title is required').max(200, 'Title must be less than 200 characters'),
   description: z.string().max(2000, 'Description must be less than 2000 characters').optional(),
-  eventType: z.enum(eventTypeValues, { required_error: 'Event type is required' }),
+  eventType: z.enum(eventTypeValues, { message: 'Event type is required' }),
   startDate: z.string().or(z.date()),
   endDate: z.string().or(z.date()).optional(),
   isAllDay: z.boolean().default(true),
