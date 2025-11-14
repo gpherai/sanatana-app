@@ -44,7 +44,8 @@
 }
 
 body {
-  @apply bg-background text-foreground;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
@@ -55,15 +56,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-muted;
+  background-color: rgb(var(--color-muted));
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted-foreground/50 rounded;
+  background-color: rgb(var(--color-muted-foreground) / 0.5);
+  border-radius: var(--radius);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-muted-foreground/70;
+  background-color: rgb(var(--color-muted-foreground) / 0.7);
 }
 
 /* Utility classes */
@@ -77,7 +79,8 @@ body {
 
 /* Focus visible styles */
 :focus-visible {
-  @apply outline-none ring-2 ring-primary ring-offset-2;
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(var(--color-primary)), 0 0 0 4px rgb(var(--color-primary) / 0.2);
 }
 
 /* Animation utilities */
