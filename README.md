@@ -1,278 +1,278 @@
-# 🕉️ Dharma Calendar
+# 🕉️ Dharma Calendar v0.3
 
-A modern, spiritual calendar application for tracking Sanatana Dharma events, festivals, lunar phases, and special days.
+A modern Hindu calendar application for tracking Sanatana Dharma events, festivals, and lunar phases with professional DevOps architecture.
 
-## 📋 Overview
+## ✨ Features
 
-Dharma Calendar helps you stay connected with important dates in the Hindu lunar calendar, including:
-
-- 🌕 Purnima (Full Moon) and 🌑 Amavasya (New Moon)
-- 🎉 Major festivals (Diwali, Holi, Navaratri, etc.)
-- 🙏 Special days related to Ganesha, Durga, Shiva, and other deities
-- 📅 Tithi and Nakshatra information
-- 🔔 Ekadashi and other Vratam days
+- **Event Management**: Create, edit, and delete events with rich categorization
+- **Calendar Views**: Interactive month view with event filtering
+- **Lunar Calculations**: Tithi, paksha, and nakshatra calculations
+- **Categories**: Organize events by custom categories (Festivals, Pujas, Vrats, etc.)
+- **Themes**: Customizable color themes with dark mode support
+- **Settings**: Save locations for accurate astronomical calculations
+- **Search & Filter**: Advanced filtering by type, category, date range, and search query
 
 ## 🚀 Tech Stack
 
-- **Framework**: Next.js 15.5 (React 19)
-- **Language**: TypeScript 5.7 (ES2022 target)
-- **Styling**: Tailwind CSS v4.1
-- **Database**: PostgreSQL 18 (native arrays support)
-- **ORM**: Prisma 6.16 (Rust-free)
-- **UI Components**: shadcn/ui + react-big-calendar + Radix UI
+### Core
+- **Framework**: Next.js 15.1.3 (App Router + React Server Components)
+- **Language**: TypeScript 5.7 (Strictest mode)
+- **Runtime**: Node.js 24 LTS or 25 Latest
+
+### Database & ORM
+- **Database**: PostgreSQL 18 (native arrays, JSON support)
+- **ORM**: Prisma 6.17 (Type-safe database access)
+- **Migrations**: Prisma Migrate (version-controlled schema changes)
+
+### Frontend
+- **Styling**: Tailwind CSS v4.1 (CSS-first configuration)
+- **UI Components**: Custom components with Radix UI primitives
 - **Icons**: Lucide React
 - **Date Handling**: date-fns 4.1
-- **Validation**: Zod 4.1
-- **Runtime**: Node.js 24
+- **Validation**: Zod 3.24+
 
-## 📁 Project Structure
+### Development
+- **Code Quality**: ESLint + Prettier
+- **Git Hooks**: Husky + lint-staged
+- **Type Checking**: TypeScript strict mode with extra checks
+
+## 🏗️ Architecture
+
+### Design Patterns
+
+- **Service Layer Pattern**: Business logic separated from API routes
+- **Repository Pattern**: Data access abstraction with `BaseRepository`
+- **Feature-Based Structure**: Organized by domain, not layer
+- **Type-Safe Environment**: Zod validation for environment variables
+- **Centralized Error Handling**: Custom `AppError` class with error codes
+
+### Folder Structure
 
 ```
-sanatana-kalender/
-├── DOCS/              # Project documentation
-├── PROGRESS/          # Development tracking
-├── src/
-│   ├── app/          # Next.js App Router
-│   │   ├── api/      # API routes
-│   │   │   ├── events/   # Event API (✓ implemented)
-│   │   │   └── themes/   # Theme API (✓ implemented)
-│   │   ├── calendar/ # Calendar page (✓ implemented)
-│   │   ├── settings/ # Settings page (✓ implemented)
-│   │   └── *.tsx     # Page components
-│   ├── components/   # React components
-│   │   ├── layout/   # Layout components
-│   │   │   └── Header.tsx  # Navigation (✓ implemented)
-│   │   ├── theme/    # Theme components
-│   │   │   └── ThemeSwitcher.tsx  # Theme switcher (✓ implemented)
-│   │   ├── events/   # Event components
-│   │   │   └── EventDetailModal.tsx  # Event details (✓ implemented)
-│   │   ├── ui/       # shadcn/ui components (placeholder)
-│   │   └── */        # Feature components (planned)
-│   ├── lib/          # Utility libraries
-│   │   ├── db.ts              # Prisma client
-│   │   ├── date-utils.ts      # Date helpers
-│   │   ├── event-utils.ts     # Event helpers
-│   │   ├── theme-manager.ts   # Theme system
-│   │   ├── validations.ts     # Zod schemas
-│   │   └── utils.ts           # General utilities
-│   ├── types/        # TypeScript type definitions
-│   │   ├── event.ts   # Event types
-│   │   ├── theme.ts   # Theme types
-│   │   ├── lunar.ts   # Lunar types
-│   │   └── api.ts     # API types
-│   └── config/       # Configuration files
-│       ├── categories.ts  # Event categories
-│       └── constants.ts   # App constants
-├── prisma/           # Database schema & migrations
-│   ├── schema.prisma # Database schema
-│   ├── seed.ts       # Seed script
-│   └── dev.db        # SQLite database
-├── public/           # Static assets
-│   └── themes/       # Theme JSON files
-└── scripts/          # Utility scripts (planned)
+src/
+├── core/                    # Core infrastructure
+│   ├── config/             # env.ts, constants.ts, categories.ts
+│   ├── database/           # prisma.ts, base.repository.ts
+│   ├── errors/             # AppError.ts, error-codes.ts, error-handler.ts
+│   └── lib/                # api-response.ts, logger.ts
+├── shared/                  # Shared across features
+│   ├── components/
+│   │   ├── ui/             # Button, Input, Select, Modal, Toast, etc.
+│   │   └── layout/         # Header, Container, ErrorBoundary
+│   ├── hooks/              # useDebounce, useLocalStorage, useFetch, etc.
+│   ├── contexts/           # ToastContext
+│   ├── types/              # api.types.ts, common.types.ts
+│   └── utils/              # cn.ts, date.utils.ts, format.utils.ts
+├── features/                # Feature modules
+│   ├── events/
+│   │   ├── components/     # EventForm, EventDetailModal
+│   │   ├── hooks/          # useEvents, useEventMutations
+│   │   ├── repositories/   # event.repository.ts
+│   │   ├── services/       # event.service.ts
+│   │   ├── types/          # event.types.ts
+│   │   └── validations/    # event.schema.ts
+│   ├── categories/         # Same structure
+│   ├── lunar/              # Moon calculations
+│   ├── calendar/           # Calendar views and filters
+│   ├── themes/             # Theme management
+│   └── settings/           # User preferences
+└── app/                     # Next.js App Router
+    ├── api/                # API routes
+    │   ├── events/
+    │   ├── categories/
+    │   ├── daily-astronomy/
+    │   ├── preferences/
+    │   ├── saved-locations/
+    │   └── themes/
+    ├── calendar/
+    ├── events/
+    ├── settings/
+    ├── layout.tsx
+    ├── page.tsx
+    └── globals.css
 ```
 
-## 🛠️ Setup Instructions
+## 🛠️ Getting Started
 
 ### Prerequisites
 
-- **Node.js 24** or higher (required for latest features)
-- **PostgreSQL 18** (local installation or Docker)
-- npm or pnpm
+- Node.js 24+ or 25+
+- PostgreSQL 18
+- npm 10+
 
 ### Installation
 
-1. Navigate to project directory:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/gpherai/sanatana-app.git
+   cd sanatana-app
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Set up PostgreSQL** (in WSL if on Windows):
+   ```bash
+   # Install PostgreSQL (if not already installed)
+   sudo apt update
+   sudo apt install postgresql-18
+
+   # Create database
+   sudo -u postgres psql
+   CREATE DATABASE dharma_calendar;
+   \q
+   ```
+
+4. **Configure environment**:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` with your PostgreSQL credentials:
+   ```
+   DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/dharma_calendar?schema=public"
+   ```
+
+5. **Set up database schema**:
+   ```bash
+   npm run db:migrate
+   ```
+
+6. **Install Husky hooks**:
+   ```bash
+   npm run prepare
+   ```
+
+7. **Start development server**:
+   ```bash
+   npm run dev
+   ```
+
+8. **Open browser**:
+   - From Windows: [http://localhost:3000](http://localhost:3000)
+   - From WSL: Same URL works!
+
+## 📜 Available Scripts
 
 ```bash
-cd C:\projects\sanatana-kalender
+npm run dev              # Start development server
+npm run build            # Build for production
+npm run start            # Start production server
+npm run lint             # Run ESLint
+npm run db:migrate       # Run Prisma migrations (development)
+npm run db:migrate:deploy # Deploy migrations (production)
+npm run prepare          # Install Husky git hooks
 ```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Setup PostgreSQL database:
-
-```bash
-# Create database (adjust credentials as needed)
-psql -U postgres -c "CREATE DATABASE dharma_calendar;"
-```
-
-4. Setup environment:
-
-```bash
-cp .env.example .env
-# Edit .env and update DATABASE_URL with your PostgreSQL credentials
-```
-
-5. Setup database schema:
-
-```bash
-npm run db:generate    # Generate Prisma client
-npm run db:push        # Create database schema
-npm run db:seed        # Seed with example data
-```
-
-6. Run development server:
-
-```bash
-npm run dev
-```
-
-6. Open [http://localhost:3000](http://localhost:3000)
-
-### Development Tools
-
-- **Prisma Studio**: `npm run db:studio` - Visual database editor at http://localhost:5555
-
-## 🎨 Implementation Status
-
-### ✅ Phase 0: Foundation (Complete)
-
-- ✅ Project structure and configuration
-- ✅ Database schema designed (6 tables)
-- ✅ TypeScript types defined
-- ✅ Utility functions implemented
-- ✅ Theme system foundation (3 themes)
-- ✅ Event categories configured (8 categories)
-- ✅ Seed data with examples
-- ✅ Root layout with Header component
-- ✅ Dark mode toggle functionality
-
-### ✅ Phase 1: View & Navigate (Complete)
-
-**Goal:** User can view events in calendar
-
-- ✅ Theme system (fully functional)
-- ✅ Settings page with theme management
-- ✅ API route: GET /api/themes
-- ✅ API route: GET /api/events
-- ✅ Calendar page with react-big-calendar
-- ✅ Display events on calendar with category colors
-- ✅ Date navigation (prev/next/today buttons)
-- ✅ View switcher (Day/Week/Month)
-- ✅ Event click → show details modal
-- ✅ Event detail modal with all information
-
-### ✅ Phase 2: Create & Manage (Complete - 100%)
-
-**Goal:** User can add, edit, and delete events
-
-- ✅ Form validation schemas (Zod with centralized enums)
-- ✅ API routes: POST/PUT/DELETE /api/events
-- ✅ GET /api/categories endpoint
-- ✅ EventForm component (reusable for create/edit)
-- ✅ New event page (/events/new) with "New Event" button on calendar
-- ✅ Edit event page (/events/[id])
-- ✅ Delete confirmation dialog with safety prompts
-- ✅ Edit/Delete buttons in event detail modal
-- ✅ Calendar auto-refresh after CRUD operations
-- ✅ Toast notifications (success/error feedback)
-- ✅ Request deduplication (AbortController)
-- ✅ Better server error messages (api-errors.ts)
-- ✅ Lunar field dropdowns (Tithi with Paksha groups, 27 Nakshatras, 12 Hindu months)
-- ✅ Font consistency across all form elements
-- ✅ Complete CRUD workflow with excellent UX
-
-### 🔍 Phase 3: Filter & Search (In Progress - 60%)
-
-**Goal:** Find specific events in large dataset
-
-- ✅ Filter sidebar with 7 filter types (search, categories, types, recurrence, lunar)
-- ✅ Real-time search across name/description/tags with debounce
-- ✅ Moon phase display in calendar (🌑🌒🌓🌔🌕🌖🌗🌘)
-- ✅ Lunar day styling with gradients (Purnima, Amavasya, Ekadashi)
-- ✅ URL parameter sync for shareable filtered views
-- ✅ LocalStorage persistence for UI preferences
-- 🔜 Date range picker for custom filtering
-- 🔜 Settings expansion (calendar/location preferences)
-- 🔜 Responsive design polish
-
-### ✨ Phase 4: Enhance & Persist (Planned)
-
-**Goal:** Professional feel and persistent data
-
-- 🔜 Database persistence for user preferences
-- 🔜 Performance optimization
-- 🔜 Error boundaries and loading states
-- 🔜 Toast notifications
-- 🔜 Form auto-save drafts
-
-### 🚀 Phase 5: Advanced Features (Planned)
-
-**Goal:** Extended functionality
-
-- 🔜 Panchang API integration with caching
-- 🔜 CSV/ICS import/export
-- 🔜 Event templates and bulk operations
-- 🔜 Browser notifications/reminders
-
-### 🌐 Phase 6: Production Deployment (Planned)
-
-**Goal:** Live and accessible
-
-- 🔜 PostgreSQL migration
-- 🔜 Docker containerization
-- 🔜 VPS deployment with SSL
-- 🔜 Backup automation and monitoring
-
-## 📖 Documentation
-
-- [Architecture](./DOCS/ARCHITECTURE.md) - Technical architecture and design decisions
-- [TODO](./PROGRESS/TODO.md) - Current tasks and roadmap
-- [Changelog](./PROGRESS/CHANGELOG.md) - Development history
 
 ## 🗄️ Database Schema
 
-### Tables
+### Models
 
-- **EventCategory** - Event categories (Ganesha, Durga, Shiva, etc.)
-- **Event** - Main events table with recurrence support
-- **EventOccurrence** - Specific date instances of events
-- **LunarEvent** - Purnima, Amavasya, Ekadashi dates
-- **UserPreference** - User settings and preferences
-- **ApiCache** - External API response caching
+- **Category**: Event categories with icons and colors
+- **Event**: Calendar events with full metadata
+- **UserPreferences**: User settings (view, notifications, etc.)
+- **SavedLocation**: Saved locations for astronomy calculations
+- **Theme**: Custom color themes
 
-See `prisma/schema.prisma` for detailed schema.
+### Key Features
 
-## 🎨 Theme System
+- Native PostgreSQL arrays for tags
+- JSON columns for flexible data (lunar dates, theme colors)
+- Proper indexing for performance
+- Foreign key constraints with cascade options
+- Timestamps (createdAt, updatedAt) on all models
 
-Three pre-configured themes available:
+## 🌐 API Routes
 
-- **spiritual-minimal** (default) - Clean, modern design with subtle spiritual touches
-- **traditional-rich** - Vibrant colors inspired by traditional temple art
-- **cosmic-purple** - Mystical purple-blue tones inspired by the universe
+### Events
+- `GET /api/events` - List with filters (type, category, date range, search)
+- `GET /api/events?upcoming=true&limit=10` - Get upcoming events
+- `POST /api/events` - Create event
+- `GET /api/events/[id]` - Get by ID
+- `PUT /api/events/[id]` - Update
+- `DELETE /api/events/[id]` - Delete
 
-Themes use JSON configuration with CSS variables (Tailwind v4 data-attribute convention) for runtime switching without rebuild. Dark mode works independently with any theme.
+### Categories
+- `GET /api/categories` - List all with event counts
+- `POST /api/categories` - Create
+- `GET/PUT/DELETE /api/categories/[id]` - CRUD operations
 
-## 📝 Development Workflow
+### Astronomy
+- `GET /api/daily-astronomy?date=YYYY-MM-DD&latitude=X&longitude=Y` - Lunar data
 
-```bash
-npm run dev          # Start development server
-npm run build        # Production build
-npm run start        # Start production server
-npm run lint         # Run ESLint
+### Preferences & Settings
+- `GET/PUT /api/preferences` - User preferences
+- `PUT /api/preferences/temp-location` - Set temporary location
+- `GET/POST /api/saved-locations` - Saved locations
+- `GET/PUT/DELETE /api/saved-locations/[id]` - Location operations
 
-npm run db:generate  # Generate Prisma client
-npm run db:push      # Push schema changes to database
-npm run db:seed      # Seed database with example data
-npm run db:studio    # Open Prisma Studio
+### Themes
+- `GET /api/themes` - List all themes
+- `POST /api/themes` - Create theme
+
+All routes return standardized JSON responses with proper error handling.
+
+## 🎨 Development Workflow
+
+### Code Quality
+
+Pre-commit hooks automatically run:
+- **ESLint**: Fix code issues
+- **Prettier**: Format code
+
+### TypeScript Configuration
+
+Strict mode enabled with extra checks:
+- `noUncheckedIndexedAccess`
+- `exactOptionalPropertyTypes`
+- `noImplicitOverride`
+- `noImplicitReturns`
+- `noUnusedLocals`
+- `noUnusedParameters`
+
+### Path Aliases
+
+```typescript
+import { env } from '@/core/config/env'
+import { Button } from '@/shared/components/ui/Button'
+import { eventService } from '@/features/events/services/event.service'
 ```
 
-## 🙏 Purpose
+## 📦 Deployment
 
-This application is built for personal use to maintain connection with spiritual practices and important dates in the Sanatana Dharma tradition. The project serves as both a practical tool and a learning journey in modern web development.
+### Environment Variables (Production)
 
-## 🤝 Contributing
+```bash
+DATABASE_URL="postgresql://..."
+NODE_ENV="production"
+NEXT_PUBLIC_APP_NAME="Dharma Calendar"
+NEXT_PUBLIC_APP_VERSION="0.3.0"
+```
 
-This is a personal project, but suggestions and ideas are welcome via issues.
+### Build & Deploy
+
+```bash
+npm run build
+npm run db:migrate:deploy
+npm run start
+```
+
+## 🔄 Version History
+
+- **v0.3.0** (Current): Complete rewrite with modern architecture
+- **v0.2.0**: Filter & Search features
+- **v0.1.0**: Initial calendar implementation
+
+## 📝 License
+
+Private project - not licensed for public use.
+
+## 👨‍💻 Author
+
+**Gerald Pherai**
+- GitHub: [@gpherai](https://github.com/gpherai)
 
 ---
 
-**Version**: 0.2.0 (Phase 3 Development)  
-**Last Updated**: October 9, 2025  
-**Status**: Phase 3 (Filter & Search) - 60% Complete 🎉  
-**Recent**: Complete filter system, Search functionality, Moon phase visualization, Lunar day gradients
+**Built with modern DevOps best practices** 🚀
