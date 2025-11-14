@@ -48,11 +48,11 @@ export function FilterSidebar({ filters, onFiltersChange, onClose }: FilterSideb
   }
 
   const activeFiltersCount = [
-    filters.eventTypes?.length,
-    filters.categoryIds?.length,
+    filters.eventTypes?.length ?? 0,
+    filters.categoryIds?.length ?? 0,
     filters.searchQuery ? 1 : 0,
     filters.isRecurring !== undefined ? 1 : 0
-  ].reduce((sum, count) => sum! + (count || 0), 0)
+  ].reduce((sum, count) => sum + count, 0)
 
   return (
     <div className="h-full flex flex-col bg-background border-r border-border">
