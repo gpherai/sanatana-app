@@ -50,10 +50,8 @@ export default function HomePage() {
                 🕉️
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                <span className="bg-gradient-primary bg-clip-text text-transparent">
-                  {env.NEXT_PUBLIC_APP_NAME}
-                </span>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-orange-900">
+                {env.NEXT_PUBLIC_APP_NAME}
               </h1>
 
               <p className="text-xl md:text-2xl text-foreground/70 mb-10 max-w-2xl mx-auto">
