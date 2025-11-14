@@ -1,0 +1,237 @@
+// Prisma Schema for Dharma Calendar
+// Database: PostgreSQL 18
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums for type safety
+enum EventType {
+  FESTIVAL
+  PUJA
+  SPECIAL_DAY
+  EKADASHI
+  SANKRANTI
+  VRATAM
+  OTHER
+}
+
+enum RecurrenceType {
+  LUNAR
+  SOLAR
+  FIXED
+  ANNUAL
+}
+
+enum EventSource {
+  MANUAL
+  PANCHANG_API
+  IMPORTED
+}
+
+enum LunarType {
+  PURNIMA
+  AMAVASYA
+  EKADASHI
+}
+
+enum Paksha {
+  Shukla
+  Krishna
+}
+
+enum MoonPhaseType {
+  NEW_MOON
+  FIRST_QUARTER
+  FULL_MOON
+  LAST_QUARTER
+}
+
+enum CalendarView {
+  month
+  week
+  day
+  agenda
+}
+
+// Event Categories (Ganesha, Durga, Shiva, etc.)
+model EventCategory {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  icon        String?  // Icon identifier
+  createdAt   DateTime @default(now())
+  
+  events      Event[]
+}
+
+// Main Events Table
+model Event {
+  id            Int             @id @default(autoincrement())
+  name          String
+  description   String?
+  
+  // Event Type
+  type          EventType       // Enum: FESTIVAL, PUJA, SPECIAL_DAY, etc.
+  categoryId    Int?
+  category      EventCategory?  @relation(fields: [categoryId], references: [id])
+  
+  // Recurrence
+  isRecurring   Boolean         @default(true)
+  recurrenceType RecurrenceType @default(LUNAR) // Enum: LUNAR, SOLAR, FIXED, ANNUAL
+  
+  // Source tracking
+  source        EventSource     @default(MANUAL) // Enum: MANUAL, PANCHANG_API, IMPORTED
+  apiId         String?         // External API reference
+  
+  // Metadata
+  importance    Int             @default(5) // 1-10 scale
+  tags          String[]        @default([]) // Native array of tags
+  
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  
+  occurrences   EventOccurrence[]
+}
+
+// Specific date occurrences of events
+model EventOccurrence {
+  id          Int       @id @default(autoincrement())
+  eventId     Int
+  event       Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  // Date/Time
+  date        DateTime  // Gregorian date
+  startTime   String?   // HH:mm format
+  endTime     String?   // HH:mm format
+  
+  // Lunar data (if applicable)
+  tithi       String?
+  nakshatra   String?
+  paksha      Paksha?   // Enum: Shukla, Krishna
+  maas        String?   // Hindu month
+  
+  // Astronomical
+  moonPhase   Float?    // 0-1 (0=new, 0.5=full)
+  sunrise     String?   // HH:mm
+  sunset      String?   // HH:mm
+  
+  // Location (for sunrise/sunset calculations)
+  locationLat Float?
+  locationLon Float?
+  
+  createdAt   DateTime  @default(now())
+
+  @@index([date])  // Performance: Date range queries in calendar
+  @@index([eventId, date])  // Performance: Event-specific occurrence queries
+}
+
+// Separate table for Purnima/Amavasya (moon phases)
+model LunarEvent {
+  id          Int       @id @default(autoincrement())
+  date        DateTime
+  time        String?   // HH:mm
+  type        LunarType // Enum: PURNIMA, AMAVASYA, EKADASHI
+  tithi       String?
+  nakshatra   String?
+  
+  createdAt   DateTime  @default(now())
+
+  @@index([date])  // Performance: Lunar event queries by date
+  @@index([type, date])  // Performance: Type-specific lunar queries (e.g., all Purnima)
+}
+
+// User preferences (single user for now)
+model UserPreference {
+  id              Int      @id @default(autoincrement())
+  
+  // Theme
+  currentTheme    String   @default("spiritual-minimal")
+  
+  // Calendar settings
+  defaultView     CalendarView @default(month) // Enum: month, week, day, agenda
+  weekStartsOn    Int          @default(0)     // 0=Sunday, 1=Monday
+  
+  // Filters (default state)
+  visibleTypes    String[] @default([]) // Native array of EventType
+  visibleCategories Int[]  @default([]) // Native array of category IDs
+  
+  // Active location (saved or temporary)
+  activeLocationId      Int?     // FK to SavedLocation (null = using temp)
+  
+  // Temporary location (for travel/GPS)
+  tempLocationName      String?
+  tempLocationLat       Float?
+  tempLocationLon       Float?
+  
+  // Location (for sunrise/sunset)
+  locationName    String?
+  locationLat     Float?
+  locationLon     Float?
+  timezone        String   @default("Europe/Amsterdam")
+  
+  // Notifications (for later)
+  notificationsEnabled Boolean @default(false)
+  notificationDaysBefore Int   @default(1)
+  
+  updatedAt       DateTime @updatedAt
+}
+
+// API Cache (for Panchang API, later)
+model ApiCache {
+  id          Int      @id @default(autoincrement())
+  endpoint    String
+  params      String   // JSON of query params
+  response    String   // JSON response
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+
+  @@unique([endpoint, params])  // Performance: Fast cache lookups (prevent duplicates)
+  @@index([expiresAt])  // Performance: Cache cleanup queries
+}
+
+// Saved Locations (for pre-generated astronomy data)
+model SavedLocation {
+  id              Int              @id @default(autoincrement())
+  name            String
+  lat             Float
+  lon             Float
+  isPrimary       Boolean          @default(false)
+  createdAt       DateTime         @default(now())
+  
+  dailyAstronomy  DailyAstronomy[]
+  
+  @@index([isPrimary])
+}
+
+// Daily Astronomy Data (Moon Phase + Sun/Moon Times per Location)
+model DailyAstronomy {
+  id                Int             @id @default(autoincrement())
+  date              DateTime
+  locationId        Int
+  location          SavedLocation   @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  
+  // Moon Phase Data (same for all locations)
+  percentageVisible Int             // 0-100
+  phase             MoonPhaseType?  // Special phases: NEW_MOON, FIRST_QUARTER, FULL_MOON, LAST_QUARTER
+  isWaxing          Boolean         // true = waxing (toenemend), false = waning (afnemend)
+  
+  // Sun Times (location-specific)
+  sunrise           String?         // HH:mm format (e.g., "06:45")
+  sunset            String?         // HH:mm format (e.g., "18:32")
+  
+  // Moon Times (location-specific)
+  moonrise          String?         // HH:mm format (e.g., "14:23")
+  moonset           String?         // HH:mm format (e.g., "03:15")
+  
+  createdAt         DateTime        @default(now())
+  
+  @@unique([date, locationId])  // One entry per date per location
+  @@index([date])
+  @@index([locationId, date])
+}

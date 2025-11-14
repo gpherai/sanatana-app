@@ -1,0 +1,696 @@
+@import "tailwindcss";
+
+/* 
+ * Tailwind v4 Multi-Theme Architecture
+ * Uses data-theme attribute + dark class for theming
+ */
+
+/* Base theme variables - Generates utilities like text-primary, bg-surface */
+@theme {
+  /* Colors */
+  --color-primary: oklch(0.55 0.15 30);
+  --color-secondary: oklch(0.65 0.12 45);
+  --color-accent: oklch(0.75 0.18 15);
+  
+  --color-background: oklch(0.98 0.01 60);
+  --color-surface: oklch(1 0 0);
+  --color-surface-hover: oklch(0.96 0.01 60);
+  
+  --color-text-primary: oklch(0.2 0.01 30);
+  --color-text-secondary: oklch(0.4 0.01 30);
+  --color-text-muted: oklch(0.6 0.01 30);
+  
+  --color-border: oklch(0.85 0.01 60);
+  --color-border-hover: oklch(0.75 0.01 60);
+  
+  /* Calendar Specific */
+  --color-calendar-today-bg: oklch(0.95 0.05 30);
+  --color-calendar-today-border: oklch(0.65 0.15 30);
+  --color-calendar-event-bg: oklch(0.92 0.05 30);
+  --color-calendar-lunar-bg: oklch(0.92 0.03 240);
+  --color-calendar-festival-bg: oklch(0.90 0.08 30);
+  --color-calendar-weekend-bg: oklch(0.96 0.01 60);
+  
+  /* Category Colors (Default - Spiritual Minimal) */
+  --category-ganesha: oklch(0.65 0.18 30);
+  --category-durga: oklch(0.55 0.22 10);
+  --category-shiva: oklch(0.55 0.15 240);
+  --category-devi: oklch(0.60 0.20 340);
+  --category-krishna: oklch(0.58 0.16 250);
+  --category-rama: oklch(0.55 0.18 150);
+  --category-hanuman: oklch(0.62 0.20 40);
+  --category-general: oklch(0.60 0.12 270);
+}
+
+/* Theme: Spiritual Minimal (Dark Mode) */
+[data-theme="spiritual-minimal"].dark {
+  --color-primary: oklch(0.65 0.15 30);
+  --color-secondary: oklch(0.55 0.12 45);
+  --color-accent: oklch(0.75 0.18 15);
+  
+  --color-background: oklch(0.15 0.01 260);
+  --color-surface: oklch(0.20 0.01 260);
+  --color-surface-hover: oklch(0.25 0.01 260);
+  
+  --color-text-primary: oklch(0.95 0.01 60);
+  --color-text-secondary: oklch(0.75 0.01 60);
+  --color-text-muted: oklch(0.55 0.01 60);
+  
+  --color-border: oklch(0.30 0.01 260);
+  --color-border-hover: oklch(0.40 0.01 260);
+  
+  --color-calendar-today-bg: oklch(0.30 0.05 30);
+  --color-calendar-today-border: oklch(0.65 0.15 30);
+  --color-calendar-event-bg: oklch(0.25 0.05 30);
+  --color-calendar-lunar-bg: oklch(0.25 0.03 240);
+  --color-calendar-festival-bg: oklch(0.28 0.08 30);
+  --color-calendar-weekend-bg: oklch(0.23 0.01 260);
+  
+  /* Category Colors (Dark Mode) */
+  --category-ganesha: oklch(0.65 0.18 30);
+  --category-durga: oklch(0.55 0.22 10);
+  --category-shiva: oklch(0.55 0.15 240);
+  --category-devi: oklch(0.60 0.20 340);
+  --category-krishna: oklch(0.58 0.16 250);
+  --category-rama: oklch(0.55 0.18 150);
+  --category-hanuman: oklch(0.62 0.20 40);
+  --category-general: oklch(0.60 0.12 270);
+}
+
+/* Theme: Traditional Rich (Light Mode) */
+[data-theme="traditional-rich"] {
+  --color-primary: oklch(0.50 0.20 20);
+  --color-secondary: oklch(0.55 0.18 40);
+  --color-accent: oklch(0.70 0.22 60);
+  
+  --color-background: oklch(0.96 0.02 40);
+  --color-surface: oklch(0.99 0.01 40);
+  --color-surface-hover: oklch(0.94 0.02 40);
+  
+  --color-text-primary: oklch(0.15 0.02 30);
+  --color-text-secondary: oklch(0.35 0.02 30);
+  --color-text-muted: oklch(0.55 0.02 30);
+  
+  --color-border: oklch(0.80 0.02 40);
+  --color-border-hover: oklch(0.70 0.02 40);
+  
+  --color-calendar-today-bg: oklch(0.92 0.08 30);
+  --color-calendar-today-border: oklch(0.50 0.20 20);
+  --color-calendar-event-bg: oklch(0.90 0.08 30);
+  --color-calendar-lunar-bg: oklch(0.88 0.06 240);
+  --color-calendar-festival-bg: oklch(0.85 0.12 30);
+  --color-calendar-weekend-bg: oklch(0.94 0.02 40);
+  
+  /* Category Colors */
+  --category-ganesha: oklch(0.60 0.22 30);
+  --category-durga: oklch(0.50 0.25 10);
+  --category-shiva: oklch(0.50 0.18 240);
+  --category-devi: oklch(0.55 0.24 340);
+  --category-krishna: oklch(0.52 0.20 250);
+  --category-rama: oklch(0.50 0.22 150);
+  --category-hanuman: oklch(0.58 0.24 40);
+  --category-general: oklch(0.55 0.15 270);
+}
+
+/* Theme: Traditional Rich (Dark Mode) */
+[data-theme="traditional-rich"].dark {
+  --color-primary: oklch(0.60 0.20 20);
+  --color-secondary: oklch(0.65 0.18 40);
+  --color-accent: oklch(0.75 0.22 60);
+  
+  --color-background: oklch(0.12 0.02 40);
+  --color-surface: oklch(0.17 0.02 40);
+  --color-surface-hover: oklch(0.22 0.02 40);
+  
+  --color-text-primary: oklch(0.95 0.02 40);
+  --color-text-secondary: oklch(0.75 0.02 40);
+  --color-text-muted: oklch(0.55 0.02 40);
+  
+  --color-border: oklch(0.28 0.02 40);
+  --color-border-hover: oklch(0.38 0.02 40);
+  
+  --color-calendar-today-bg: oklch(0.28 0.08 30);
+  --color-calendar-today-border: oklch(0.60 0.20 20);
+  --color-calendar-event-bg: oklch(0.24 0.08 30);
+  --color-calendar-lunar-bg: oklch(0.22 0.06 240);
+  --color-calendar-festival-bg: oklch(0.26 0.12 30);
+  --color-calendar-weekend-bg: oklch(0.20 0.02 40);
+  
+  /* Category Colors (Dark Mode) */
+  --category-ganesha: oklch(0.60 0.22 30);
+  --category-durga: oklch(0.50 0.25 10);
+  --category-shiva: oklch(0.50 0.18 240);
+  --category-devi: oklch(0.55 0.24 340);
+  --category-krishna: oklch(0.52 0.20 250);
+  --category-rama: oklch(0.50 0.22 150);
+  --category-hanuman: oklch(0.58 0.24 40);
+  --category-general: oklch(0.55 0.15 270);
+}
+
+/* Theme: Cosmic Purple (Light Mode) */
+[data-theme="cosmic-purple"] {
+  --color-primary: oklch(0.70 0.18 260);
+  --color-secondary: oklch(0.60 0.14 280);
+  --color-accent: oklch(0.75 0.20 320);
+  
+  --color-background: oklch(0.97 0.01 260);
+  --color-surface: oklch(1 0 0);
+  --color-surface-hover: oklch(0.95 0.01 260);
+  
+  --color-text-primary: oklch(0.20 0.01 260);
+  --color-text-secondary: oklch(0.40 0.01 260);
+  --color-text-muted: oklch(0.60 0.01 260);
+  
+  --color-border: oklch(0.85 0.01 260);
+  --color-border-hover: oklch(0.75 0.01 260);
+  
+  --color-calendar-today-bg: oklch(0.93 0.08 260);
+  --color-calendar-today-border: oklch(0.70 0.18 260);
+  --color-calendar-event-bg: oklch(0.90 0.06 260);
+  --color-calendar-lunar-bg: oklch(0.90 0.05 240);
+  --color-calendar-festival-bg: oklch(0.88 0.10 260);
+  --color-calendar-weekend-bg: oklch(0.95 0.01 260);
+  
+  /* Category Colors */
+  --category-ganesha: oklch(0.70 0.20 30);
+  --category-durga: oklch(0.65 0.22 10);
+  --category-shiva: oklch(0.65 0.18 240);
+  --category-devi: oklch(0.70 0.20 340);
+  --category-krishna: oklch(0.68 0.18 250);
+  --category-rama: oklch(0.65 0.20 150);
+  --category-hanuman: oklch(0.72 0.22 40);
+  --category-general: oklch(0.65 0.15 270);
+}
+
+/* Theme: Cosmic Purple (Dark Mode) */
+[data-theme="cosmic-purple"].dark {
+  --color-primary: oklch(0.70 0.18 260);
+  --color-secondary: oklch(0.60 0.14 280);
+  --color-accent: oklch(0.75 0.20 320);
+  
+  --color-background: oklch(0.10 0.01 260);
+  --color-surface: oklch(0.15 0.01 260);
+  --color-surface-hover: oklch(0.20 0.01 260);
+  
+  --color-text-primary: oklch(0.95 0.01 260);
+  --color-text-secondary: oklch(0.75 0.01 260);
+  --color-text-muted: oklch(0.55 0.01 260);
+  
+  --color-border: oklch(0.25 0.01 260);
+  --color-border-hover: oklch(0.35 0.01 260);
+  
+  --color-calendar-today-bg: oklch(0.25 0.08 260);
+  --color-calendar-today-border: oklch(0.70 0.18 260);
+  --color-calendar-event-bg: oklch(0.20 0.06 260);
+  --color-calendar-lunar-bg: oklch(0.20 0.05 240);
+  --color-calendar-festival-bg: oklch(0.25 0.10 260);
+  --color-calendar-weekend-bg: oklch(0.18 0.01 260);
+  
+  /* Category Colors (Dark Mode) */
+  --category-ganesha: oklch(0.70 0.20 30);
+  --category-durga: oklch(0.65 0.22 10);
+  --category-shiva: oklch(0.65 0.18 240);
+  --category-devi: oklch(0.70 0.20 340);
+  --category-krishna: oklch(0.68 0.18 250);
+  --category-rama: oklch(0.65 0.20 150);
+  --category-hanuman: oklch(0.72 0.22 40);
+  --category-general: oklch(0.65 0.15 270);
+}
+
+/* Theme: Forest Sage (Light Mode) */
+[data-theme="forest-sage"] {
+  --color-primary: oklch(0.50 0.16 160);
+  --color-secondary: oklch(0.62 0.10 95);
+  --color-accent: oklch(0.75 0.18 80);
+  
+  --color-background: oklch(0.98 0.02 95);
+  --color-surface: oklch(1 0 0);
+  --color-surface-hover: oklch(0.95 0.02 95);
+  
+  --color-text-primary: oklch(0.18 0.02 30);
+  --color-text-secondary: oklch(0.38 0.02 30);
+  --color-text-muted: oklch(0.56 0.02 30);
+  
+  --color-border: oklch(0.84 0.02 95);
+  --color-border-hover: oklch(0.74 0.02 95);
+  
+  --color-calendar-today-bg: oklch(0.92 0.05 160);
+  --color-calendar-today-border: oklch(0.60 0.12 160);
+  --color-calendar-event-bg: oklch(0.90 0.06 160);
+  --color-calendar-lunar-bg: oklch(0.90 0.05 240);
+  --color-calendar-festival-bg: oklch(0.88 0.10 80);
+  --color-calendar-weekend-bg: oklch(0.96 0.02 95);
+  
+  /* Category Colors */
+  --category-ganesha: oklch(0.62 0.18 30);
+  --category-durga: oklch(0.54 0.22 10);
+  --category-shiva: oklch(0.52 0.16 240);
+  --category-devi: oklch(0.60 0.20 340);
+  --category-krishna: oklch(0.56 0.18 250);
+  --category-rama: oklch(0.52 0.18 150);
+  --category-hanuman: oklch(0.64 0.22 40);
+  --category-general: oklch(0.58 0.14 270);
+}
+
+/* Theme: Forest Sage (Dark Mode) */
+[data-theme="forest-sage"].dark {
+  --color-primary: oklch(0.60 0.16 160);
+  --color-secondary: oklch(0.72 0.10 95);
+  --color-accent: oklch(0.80 0.18 80);
+  
+  --color-background: oklch(0.12 0.02 95);
+  --color-surface: oklch(0.18 0.02 95);
+  --color-surface-hover: oklch(0.22 0.02 95);
+  
+  --color-text-primary: oklch(0.95 0.02 95);
+  --color-text-secondary: oklch(0.75 0.02 95);
+  --color-text-muted: oklch(0.55 0.02 95);
+  
+  --color-border: oklch(0.28 0.02 95);
+  --color-border-hover: oklch(0.38 0.02 95);
+  
+  --color-calendar-today-bg: oklch(0.28 0.05 160);
+  --color-calendar-today-border: oklch(0.60 0.12 160);
+  --color-calendar-event-bg: oklch(0.24 0.06 160);
+  --color-calendar-lunar-bg: oklch(0.24 0.05 240);
+  --color-calendar-festival-bg: oklch(0.26 0.10 80);
+  --color-calendar-weekend-bg: oklch(0.20 0.02 95);
+  
+  /* Category Colors (Dark Mode) */
+  --category-ganesha: oklch(0.72 0.18 30);
+  --category-durga: oklch(0.64 0.22 10);
+  --category-shiva: oklch(0.62 0.16 240);
+  --category-devi: oklch(0.70 0.20 340);
+  --category-krishna: oklch(0.66 0.18 250);
+  --category-rama: oklch(0.62 0.18 150);
+  --category-hanuman: oklch(0.74 0.22 40);
+  --category-general: oklch(0.68 0.14 270);
+}
+
+/* Custom dark mode variant - class-based */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Base Styles */
+@layer base {
+  /* Improve native dark mode support for form controls and scrollbars */
+  :root {
+    color-scheme: light;
+  }
+  
+  :root.dark {
+    color-scheme: dark;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-text-primary;
+    @apply font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-text-primary font-semibold;
+  }
+  
+  /* Ensure all form elements use the same font as the body */
+  input, textarea, select, option, optgroup {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  }
+}
+
+/* Component Utilities */
+@layer components {
+  .surface {
+    @apply bg-surface border border-border rounded-lg;
+  }
+  
+  .surface-hover {
+    @apply hover:bg-surface-hover transition-colors;
+  }
+}
+
+/* React Big Calendar Styling */
+.rbc-calendar {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+/* Calendar Header */
+.rbc-header {
+  border-bottom: 1px solid var(--color-border);
+  padding: 8px 4px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-hover);
+}
+
+.rbc-header + .rbc-header {
+  border-left: 1px solid var(--color-border);
+}
+
+/* Month View */
+.rbc-month-view {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rbc-month-row {
+  border-top: 1px solid var(--color-border);
+  min-height: 80px;
+}
+
+.rbc-day-bg {
+  border-left: 1px solid var(--color-border);
+}
+
+.rbc-day-bg:hover {
+  background-color: var(--color-surface-hover);
+}
+
+/* Today Highlighting - Applied via dayPropGetter */
+.rbc-day-bg.today {
+  background-color: var(--color-calendar-today-bg) !important;
+  border: 2px solid var(--color-calendar-today-border) !important;
+  position: relative;
+}
+
+/* Today with weekend combination */
+.rbc-day-bg.today.weekend-day {
+  background: linear-gradient(135deg, var(--color-calendar-today-bg) 0%, var(--color-calendar-weekend-bg) 100%) !important;
+  border: 2px solid var(--color-calendar-today-border) !important;
+}
+
+/* Today with lunar combination */
+.rbc-day-bg.today.lunar-day {
+  background: linear-gradient(135deg, var(--color-calendar-today-bg) 0%, var(--color-calendar-lunar-bg) 100%) !important;
+  border: 2px solid var(--color-calendar-today-border) !important;
+}
+
+/* Legacy .rbc-today fallback */
+.rbc-today {
+  background-color: var(--color-calendar-today-bg) !important;
+}
+
+.rbc-off-range-bg {
+  background-color: var(--color-surface-hover);
+  opacity: 0.5;
+}
+
+/* Weekend Styling - Applied via dayPropGetter + fallback column selectors */
+.rbc-day-bg.weekend-day,
+.rbc-off-range-bg.weekend-day {
+  background-color: var(--color-calendar-weekend-bg) !important;
+  opacity: 1 !important;
+}
+
+/* Fallback: Target Sunday (column 1) and Saturday (column 7) by position */
+.rbc-month-row > .rbc-day-bg:first-child,
+.rbc-month-row > .rbc-day-bg:nth-child(7),
+.rbc-month-row > .rbc-off-range-bg:first-child,
+.rbc-month-row > .rbc-off-range-bg:nth-child(7) {
+  background-color: var(--color-calendar-weekend-bg) !important;
+  opacity: 1 !important;
+}
+
+/* Lunar Day Styling - Days with lunar events (Purnima, Amavasya, etc.) */
+/* Note: Moon phase emoji's are now shown in DateHeader component, not via ::before */
+.rbc-day-bg.lunar-day {
+  background: linear-gradient(135deg, var(--color-calendar-lunar-bg) 0%, transparent 100%);
+  position: relative;
+}
+
+/* Purnima (Full Moon) - Golden/Yellow gradient */
+.rbc-day-bg.lunar-purnima {
+  background: linear-gradient(135deg, oklch(0.92 0.08 80) 0%, transparent 100%);
+}
+
+/* Amavasya (New Moon) - Dark purple/blue gradient */
+.rbc-day-bg.lunar-amavasya {
+  background: linear-gradient(135deg, oklch(0.88 0.05 280) 0%, transparent 100%);
+}
+
+/* Ekadashi - Crescent moon */
+.rbc-day-bg.lunar-ekadashi {
+  background: linear-gradient(135deg, oklch(0.90 0.06 240) 0%, transparent 100%);
+}
+
+/* Lunar day + Weekend combination */
+.rbc-day-bg.weekend-day.lunar-day {
+  background: linear-gradient(135deg, var(--color-calendar-lunar-bg) 0%, var(--color-calendar-weekend-bg) 100%);
+}
+
+.rbc-day-bg.weekend-day.lunar-purnima {
+  background: linear-gradient(135deg, oklch(0.92 0.08 80) 0%, var(--color-calendar-weekend-bg) 100%);
+}
+
+.rbc-day-bg.weekend-day.lunar-amavasya {
+  background: linear-gradient(135deg, oklch(0.88 0.05 280) 0%, var(--color-calendar-weekend-bg) 100%);
+}
+
+.rbc-day-bg.weekend-day.lunar-ekadashi {
+  background: linear-gradient(135deg, oklch(0.90 0.06 240) 0%, var(--color-calendar-weekend-bg) 100%);
+}
+
+/* Date Cell */
+.rbc-date-cell {
+  padding: 4px 8px;
+  text-align: right;
+  position: relative;
+  z-index: 2; /* Above lunar indicator */
+}
+
+.rbc-date-cell > a,
+.rbc-date-cell > button {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.rbc-date-cell.rbc-now > a,
+.rbc-date-cell.rbc-now > button {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.rbc-off-range {
+  color: var(--color-text-muted);
+}
+
+/* Events */
+.rbc-event {
+  background-color: var(--color-calendar-event-bg);
+  border: 1px solid var(--color-primary);
+  color: var(--color-text-primary);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rbc-event:hover {
+  background-color: var(--color-primary);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rbc-event.rbc-selected {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.rbc-event-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.rbc-event-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Show More Link */
+.rbc-show-more {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 4px 8px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.rbc-show-more:hover {
+  text-decoration: underline;
+  background-color: var(--color-surface-hover);
+}
+
+/* Week View */
+.rbc-time-view {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rbc-time-header {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.rbc-time-content {
+  border-top: 1px solid var(--color-border);
+}
+
+.rbc-time-slot {
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.rbc-current-time-indicator {
+  background-color: var(--color-primary);
+  height: 2px;
+}
+
+.rbc-time-column {
+  border-left: 1px solid var(--color-border);
+}
+
+/* Agenda View */
+.rbc-agenda-view {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rbc-agenda-view table {
+  border-spacing: 0;
+}
+
+.rbc-agenda-date-cell,
+.rbc-agenda-time-cell {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.rbc-agenda-event-cell {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.rbc-agenda-event-cell:hover {
+  background-color: var(--color-surface-hover);
+  cursor: pointer;
+}
+
+/* Toolbar Overrides (we use custom toolbar, but style default if needed) */
+.rbc-toolbar {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.rbc-toolbar button {
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rbc-toolbar button:hover {
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-border-hover);
+}
+
+.rbc-toolbar button.rbc-active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+/* Category-specific event colors - Specific selectors to override react-big-calendar defaults */
+.rbc-event.event-category-ganesha { 
+  border-color: var(--category-ganesha) !important; 
+  background-color: color-mix(in oklch, var(--category-ganesha) 25%, transparent) !important;
+}
+.rbc-event.event-category-durga { 
+  border-color: var(--category-durga) !important; 
+  background-color: color-mix(in oklch, var(--category-durga) 25%, transparent) !important;
+}
+.rbc-event.event-category-shiva { 
+  border-color: var(--category-shiva) !important; 
+  background-color: color-mix(in oklch, var(--category-shiva) 25%, transparent) !important;
+}
+.rbc-event.event-category-devi { 
+  border-color: var(--category-devi) !important; 
+  background-color: color-mix(in oklch, var(--category-devi) 25%, transparent) !important;
+}
+.rbc-event.event-category-krishna { 
+  border-color: var(--category-krishna) !important; 
+  background-color: color-mix(in oklch, var(--category-krishna) 25%, transparent) !important;
+}
+.rbc-event.event-category-rama { 
+  border-color: var(--category-rama) !important; 
+  background-color: color-mix(in oklch, var(--category-rama) 25%, transparent) !important;
+}
+.rbc-event.event-category-hanuman { 
+  border-color: var(--category-hanuman) !important; 
+  background-color: color-mix(in oklch, var(--category-hanuman) 25%, transparent) !important;
+}
+.rbc-event.event-category-general { 
+  border-color: var(--category-general) !important; 
+  background-color: color-mix(in oklch, var(--category-general) 25%, transparent) !important;
+}
+
+/* Category badge colors (for modal) */
+.event-category-ganesha { 
+  border-color: var(--category-ganesha);
+  background-color: color-mix(in oklch, var(--category-ganesha) 15%, transparent);
+  color: var(--category-ganesha);
+}
+.event-category-durga { 
+  border-color: var(--category-durga);
+  background-color: color-mix(in oklch, var(--category-durga) 15%, transparent);
+  color: var(--category-durga);
+}
+.event-category-shiva { 
+  border-color: var(--category-shiva);
+  background-color: color-mix(in oklch, var(--category-shiva) 15%, transparent);
+  color: var(--category-shiva);
+}
+.event-category-devi { 
+  border-color: var(--category-devi);
+  background-color: color-mix(in oklch, var(--category-devi) 15%, transparent);
+  color: var(--category-devi);
+}
+.event-category-krishna { 
+  border-color: var(--category-krishna);
+  background-color: color-mix(in oklch, var(--category-krishna) 15%, transparent);
+  color: var(--category-krishna);
+}
+.event-category-rama { 
+  border-color: var(--category-rama);
+  background-color: color-mix(in oklch, var(--category-rama) 15%, transparent);
+  color: var(--category-rama);
+}
+.event-category-hanuman { 
+  border-color: var(--category-hanuman);
+  background-color: color-mix(in oklch, var(--category-hanuman) 15%, transparent);
+  color: var(--category-hanuman);
+}
+.event-category-general { 
+  border-color: var(--category-general);
+  background-color: color-mix(in oklch, var(--category-general) 15%, transparent);
+  color: var(--category-general);
+}
