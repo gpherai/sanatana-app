@@ -12,10 +12,11 @@ import { success, noContent } from '@/core/lib/api-response'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id)
+    const { id: idStr } = await params
+    const id = parseInt(idStr)
     const category = await categoryService.getCategoryById(id)
     return success(category)
   } catch (error) {
@@ -25,10 +26,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id)
+    const { id: idStr } = await params
+    const id = parseInt(idStr)
     const body = await request.json()
     const category = await categoryService.updateCategory({ id, ...body })
     return success(category)
@@ -39,10 +41,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id)
+    const { id: idStr } = await params
+    const id = parseInt(idStr)
     const { searchParams } = request.nextUrl
     const deleteEvents = searchParams.get('deleteEvents') === 'true'
 

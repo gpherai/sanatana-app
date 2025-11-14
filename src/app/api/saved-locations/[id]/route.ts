@@ -12,10 +12,11 @@ import { success, noContent } from '@/core/lib/api-response'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id)
+    const { id: idStr } = await params
+    const id = parseInt(idStr)
     const location = await settingsService.getSavedLocationById(id)
     return success(location)
   } catch (error) {
@@ -25,10 +26,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id)
+    const { id: idStr } = await params
+    const id = parseInt(idStr)
     const body = await request.json()
     const location = await settingsService.updateSavedLocation({ id, ...body })
     return success(location)
@@ -39,10 +41,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id)
+    const { id: idStr } = await params
+    const id = parseInt(idStr)
     await settingsService.deleteSavedLocation(id)
     return noContent()
   } catch (error) {

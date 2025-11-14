@@ -21,7 +21,7 @@ export class EventService {
 
   async getEvents(filters?: EventFilters) {
     if (filters) {
-      const validatedFilters = eventFiltersSchema.parse(filters)
+      const validatedFilters = eventFiltersSchema.parse(filters) as EventFilters
       return await eventRepository.findWithFilters(validatedFilters)
     }
 

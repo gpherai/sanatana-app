@@ -4,6 +4,7 @@
  */
 
 import { prisma } from '@/core/database/prisma'
+import { Prisma } from '@prisma/client'
 import { AppError } from '@/core/errors/AppError'
 import { UpdatePreferencesInput, CreateLocationInput, UpdateLocationInput } from '../types/settings.types'
 
@@ -20,7 +21,7 @@ export class SettingsService {
           showLunarInfo: true,
           showHolidays: true,
           notifications: false,
-          tempLocation: null
+          tempLocation: Prisma.JsonNull
         }
       })
     }
@@ -42,7 +43,7 @@ export class SettingsService {
 
     return await prisma.userPreferences.update({
       where: { id: existing.id },
-      data: { tempLocation: location }
+      data: { tempLocation: location ?? Prisma.JsonNull }
     })
   }
 

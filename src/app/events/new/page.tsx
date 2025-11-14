@@ -9,14 +9,14 @@ import { useRouter } from 'next/navigation'
 import { Container } from '@/shared/components/layout/Container'
 import { EventForm } from '@/features/events/components/EventForm'
 import { useEventMutations } from '@/features/events/hooks/useEventMutations'
-import { CreateEventInput } from '@/features/events/types/event.types'
+import { CreateEventInput, UpdateEventInput } from '@/features/events/types/event.types'
 
 export default function CreateEventPage() {
   const router = useRouter()
   const { createEvent, createState } = useEventMutations()
 
-  const handleSubmit = async (data: CreateEventInput) => {
-    const event = await createEvent(data)
+  const handleSubmit = async (data: CreateEventInput | UpdateEventInput) => {
+    const event = await createEvent(data as CreateEventInput)
     if (event) {
       router.push('/calendar')
     }

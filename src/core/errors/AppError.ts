@@ -109,14 +109,19 @@ export class AppError extends Error {
 
   // Serialization for API responses
   toJSON() {
+    const error: Record<string, any> = {
+      code: this.code,
+      message: this.message,
+      timestamp: this.timestamp.toISOString()
+    }
+
+    if (this.details) {
+      error.details = this.details
+    }
+
     return {
       success: false,
-      error: {
-        code: this.code,
-        message: this.message,
-        ...(this.details && { details: this.details }),
-        timestamp: this.timestamp.toISOString()
-      }
+      error
     }
   }
 }

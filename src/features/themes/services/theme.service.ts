@@ -44,7 +44,7 @@ export class ThemeService {
     return await prisma.theme.create({
       data: {
         name: input.name,
-        colors: input.colors,
+        colors: input.colors as any,
         isActive: input.isActive ?? false
       }
     })
@@ -72,9 +72,14 @@ export class ThemeService {
       })
     }
 
+    const updatePayload: any = { ...updateData }
+    if (updatePayload.colors) {
+      updatePayload.colors = updatePayload.colors as any
+    }
+
     return await prisma.theme.update({
       where: { id },
-      data: updateData
+      data: updatePayload
     })
   }
 

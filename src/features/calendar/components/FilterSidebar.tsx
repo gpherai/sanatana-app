@@ -8,7 +8,7 @@
 import { useState } from 'react'
 import { Button } from '@/shared/components/ui/Button'
 import { Input } from '@/shared/components/ui/Input'
-import { EVENT_TYPES } from '@/core/config/constants'
+import { EVENT_TYPES, EventType } from '@/core/config/constants'
 import { EventFilters } from '@/features/events/types/event.types'
 import { useDebounce } from '@/shared/hooks'
 
@@ -22,7 +22,7 @@ export function FilterSidebar({ filters, onFiltersChange, onClose }: FilterSideb
   const [searchQuery, setSearchQuery] = useState(filters.searchQuery || '')
   const debouncedSearch = useDebounce(searchQuery, 300)
 
-  const handleEventTypeToggle = (eventType: string) => {
+  const handleEventTypeToggle = (eventType: EventType) => {
     const currentTypes = filters.eventTypes || []
     const newTypes = currentTypes.includes(eventType)
       ? currentTypes.filter(t => t !== eventType)
@@ -52,7 +52,7 @@ export function FilterSidebar({ filters, onFiltersChange, onClose }: FilterSideb
     filters.categoryIds?.length,
     filters.searchQuery ? 1 : 0,
     filters.isRecurring !== undefined ? 1 : 0
-  ].reduce((sum, count) => sum + (count || 0), 0)
+  ].reduce((sum, count) => sum! + (count || 0), 0)
 
   return (
     <div className="h-full flex flex-col bg-background border-r border-border">
