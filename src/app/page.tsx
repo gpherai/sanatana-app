@@ -41,7 +41,7 @@ export default function HomePage() {
     <>
       <div className="relative overflow-hidden">
         {/* Hero Section with gradient background */}
-        <div className="relative bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 py-20 lg:py-32">
+        <div className="relative bg-gradient-primary py-20 lg:py-32">
           <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-5"></div>
 
           <Container className="relative">
@@ -50,11 +50,11 @@ export default function HomePage() {
                 🕉️
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-orange-900">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white drop-shadow-lg">
                 {env.NEXT_PUBLIC_APP_NAME}
               </h1>
 
-              <p className="text-xl md:text-2xl text-foreground/70 mb-10 max-w-2xl mx-auto">
+              <p className="text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto">
                 Track Sanatana Dharma events, festivals, and lunar phases with elegance
               </p>
 

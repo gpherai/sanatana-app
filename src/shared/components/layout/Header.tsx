@@ -66,15 +66,23 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Dark Mode Toggle */}
+            {/* Dark Mode Toggle Switch */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+              className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                isDark ? 'bg-primary' : 'bg-muted'
+              }`}
               aria-label="Toggle dark mode"
               title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
-              <span className="text-2xl">
-                {isDark ? '🌙' : '☀️'}
+              <span
+                className={`inline-flex h-6 w-6 items-center justify-center transform rounded-full bg-white shadow-md transition-transform ${
+                  isDark ? 'translate-x-9' : 'translate-x-1'
+                }`}
+              >
+                <span className="text-base">
+                  {isDark ? '🌙' : '☀️'}
+                </span>
               </span>
             </button>
 
