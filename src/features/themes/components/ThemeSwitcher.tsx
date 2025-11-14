@@ -68,7 +68,10 @@ export function ThemeSwitcher() {
         disabled={isSwitching}
       />
 
-      <div className="flex items-center justify-between p-4 border border-border rounded-lg bg-card">
+      <div
+        onClick={toggleDarkMode}
+        className="flex items-center justify-between p-4 border border-border rounded-lg bg-card cursor-pointer hover:bg-muted/50 transition-colors"
+      >
         <div className="flex items-center gap-3">
           <span className="text-2xl">{isDark ? '🌙' : '☀️'}</span>
           <div>
@@ -80,9 +83,8 @@ export function ThemeSwitcher() {
             </div>
           </div>
         </div>
-        <button
-          onClick={toggleDarkMode}
-          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+        <div
+          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
             isDark ? 'bg-primary' : 'bg-muted'
           }`}
           aria-label="Toggle dark mode"
@@ -92,7 +94,7 @@ export function ThemeSwitcher() {
               isDark ? 'translate-x-6' : 'translate-x-1'
             }`}
           />
-        </button>
+        </div>
       </div>
 
       {isSwitching && (
