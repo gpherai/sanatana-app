@@ -11,6 +11,7 @@ import { Input } from '@/shared/components/ui/Input'
 import { EVENT_TYPES, EventType } from '@/core/config/constants'
 import { EventFilters } from '@/features/events/types/event.types'
 import { useDebounce } from '@/shared/hooks'
+import { useCategories } from '@/features/categories/hooks/useCategories'
 
 interface FilterSidebarProps {
   filters: EventFilters
@@ -21,6 +22,7 @@ interface FilterSidebarProps {
 export function FilterSidebar({ filters, onFiltersChange, onClose }: FilterSidebarProps) {
   const [searchQuery, setSearchQuery] = useState(filters.searchQuery || '')
   const debouncedSearch = useDebounce(searchQuery, 300)
+  const { data: categories, isLoading: categoriesLoading } = useCategories()
 
   const handleEventTypeToggle = (eventType: EventType) => {
     const currentTypes = filters.eventTypes || []
@@ -31,6 +33,18 @@ export function FilterSidebar({ filters, onFiltersChange, onClose }: FilterSideb
     onFiltersChange({
       ...filters,
       eventTypes: newTypes.length > 0 ? newTypes : undefined
+    })
+  }
+
+  const handleCategoryToggle = (categoryId: number) => {
+    const currentCategories = filters.categoryIds || []
+    const newCategories = currentCategories.includes(categoryId)
+      ? currentCategories.filter(id => id !== categoryId)
+      : [...currentCategories, categoryId]
+
+    onFiltersChange({
+      ...filters,
+      categoryIds: newCategories.length > 0 ? newCategories : undefined
     })
   }
 
@@ -107,6 +121,36 @@ export function FilterSidebar({ filters, onFiltersChange, onClose }: FilterSideb
               )
             })}
           </div>
+        </div>
+
+        <div>
+          <h3 className="text-sm font-medium text-foreground mb-3">Categories</h3>
+          {categoriesLoading ? (
+            <div className="text-sm text-muted-foreground p-2">Loading categories...</div>
+          ) : categories && categories.length > 0 ? (
+            <div className="space-y-2">
+              {categories.map((category) => {
+                const isSelected = filters.categoryIds?.includes(category.id) || false
+                return (
+                  <label
+                    key={category.id}
+                    className="flex items-center gap-2 cursor-pointer hover:bg-muted p-2 rounded"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => handleCategoryToggle(category.id)}
+                      className="w-4 h-4 text-primary border-border rounded focus:ring-primary"
+                    />
+                    <span className="text-xl">{category.icon}</span>
+                    <span className="text-sm text-foreground">{category.name}</span>
+                  </label>
+                )
+              })}
+            </div>
+          ) : (
+            <div className="text-sm text-muted-foreground p-2">No categories available</div>
+          )}
         </div>
 
         <div>
