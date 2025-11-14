@@ -28,27 +28,34 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-40 w-full border-b border-border/40 glass shadow-soft">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl">🕉️</span>
-              <span className="font-semibold text-lg text-foreground">
-                {env.NEXT_PUBLIC_APP_NAME}
-              </span>
+        <div className="flex h-20 items-center justify-between">
+          <div className="flex items-center gap-10">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="text-3xl transform transition-transform group-hover:scale-110 group-hover:rotate-12 duration-300">
+                🕉️
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-xl bg-gradient-primary bg-clip-text text-transparent">
+                  {env.NEXT_PUBLIC_APP_NAME}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  Sanatana Dharma Calendar
+                </span>
+              </div>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-1">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'text-sm font-medium transition-colors hover:text-primary',
+                    'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                     isActive(item.href)
-                      ? 'text-primary'
-                      : 'text-muted-foreground'
+                      ? 'bg-gradient-primary text-white shadow-soft'
+                      : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
                   )}
                 >
                   {item.label}
@@ -58,23 +65,23 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-xs text-muted-foreground">
+            <span className="hidden sm:inline-flex text-xs text-muted-foreground px-3 py-1 bg-muted/50 rounded-full">
               v{env.NEXT_PUBLIC_APP_VERSION}
             </span>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        <nav className="md:hidden flex items-center gap-4 pb-3 overflow-x-auto">
+        <nav className="md:hidden flex items-center gap-2 pb-4 overflow-x-auto">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                'text-sm font-medium whitespace-nowrap transition-colors hover:text-primary',
+                'px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200',
                 isActive(item.href)
-                  ? 'text-primary'
-                  : 'text-muted-foreground'
+                  ? 'bg-gradient-primary text-white shadow-soft'
+                  : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
               )}
             >
               {item.label}
