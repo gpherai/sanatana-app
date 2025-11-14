@@ -22,7 +22,7 @@ interface FilterSidebarProps {
 export function FilterSidebar({ filters, onFiltersChange, onClose }: FilterSidebarProps) {
   const [searchQuery, setSearchQuery] = useState(filters.searchQuery || '')
   const debouncedSearch = useDebounce(searchQuery, 300)
-  const { data: categories, isLoading: categoriesLoading } = useCategories()
+  const { data: categories, loading: categoriesLoading } = useCategories()
 
   const handleEventTypeToggle = (eventType: EventType) => {
     const currentTypes = filters.eventTypes || []

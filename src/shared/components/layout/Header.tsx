@@ -16,7 +16,6 @@ export function Header() {
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/calendar', label: 'Calendar' },
-    { href: '/events', label: 'Events' },
     { href: '/settings', label: 'Settings' }
   ]
 
