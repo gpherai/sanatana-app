@@ -40,7 +40,7 @@
 }
 
 * {
-  @apply border-border;
+  border-color: rgb(var(--color-border));
 }
 
 body {
