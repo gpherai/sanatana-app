@@ -1,0 +1,110 @@
+/**
+ * Global Styles
+ * Tailwind CSS v4 configuration with CSS variables
+ */
+
+@import "tailwindcss";
+
+:root {
+  --color-primary: 255 90 31;
+  --color-secondary: 139 92 246;
+  --color-accent: 236 72 153;
+
+  --color-background: 255 255 255;
+  --color-foreground: 15 23 42;
+
+  --color-muted: 241 245 249;
+  --color-muted-foreground: 100 116 139;
+
+  --color-card: 255 255 255;
+  --color-card-foreground: 15 23 42;
+
+  --color-border: 226 232 240;
+
+  --radius: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: 15 23 42;
+    --color-foreground: 248 250 252;
+
+    --color-muted: 30 41 59;
+    --color-muted-foreground: 148 163 184;
+
+    --color-card: 30 41 59;
+    --color-card-foreground: 248 250 252;
+
+    --color-border: 51 65 85;
+  }
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/50 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/70;
+}
+
+/* Utility classes */
+@utility container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Focus visible styles */
+:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2;
+}
+
+/* Animation utilities */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-in-from-right-full {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-in {
+  animation-duration: 150ms;
+  animation-fill-mode: both;
+}
+
+.slide-in-from-right-full {
+  animation-name: slide-in-from-right-full;
+}
