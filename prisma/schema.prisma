@@ -81,12 +81,13 @@ model SavedLocation {
 
 // Custom Themes
 model Theme {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  colors    Json     // { primary, secondary, accent, background, foreground, ... }
-  isActive  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
+  colors     Json     // { primary, secondary, accent, background, foreground, ... }
+  darkColors Json?    // Optional dark mode variant colors
+  isActive   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@index([isActive])
   @@index([name])
