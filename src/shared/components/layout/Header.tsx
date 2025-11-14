@@ -32,12 +32,12 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-10">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="text-3xl transform transition-transform group-hover:scale-110 group-hover:rotate-12 duration-300">
+            <Link href="/" className="flex items-center gap-3">
+              <div className="text-3xl">
                 🕉️
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-xl bg-gradient-primary bg-clip-text text-transparent">
+                <span className="font-bold text-xl text-primary">
                   {env.NEXT_PUBLIC_APP_NAME}
                 </span>
                 <span className="text-xs text-muted-foreground">
@@ -54,7 +54,7 @@ export function Header() {
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                     isActive(item.href)
-                      ? 'bg-gradient-primary text-white shadow-soft'
+                      ? 'bg-orange-600 text-white shadow-soft'
                       : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
                   )}
                 >
@@ -80,7 +80,7 @@ export function Header() {
               className={cn(
                 'px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200',
                 isActive(item.href)
-                  ? 'bg-gradient-primary text-white shadow-soft'
+                  ? 'bg-orange-600 text-white shadow-soft'
                   : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
               )}
             >
