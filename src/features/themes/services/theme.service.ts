@@ -45,6 +45,7 @@ export class ThemeService {
       data: {
         name: input.name,
         colors: input.colors as any,
+        darkColors: input.darkColors as any,
         isActive: input.isActive ?? false
       }
     })
@@ -75,6 +76,9 @@ export class ThemeService {
     const updatePayload: any = { ...updateData }
     if (updatePayload.colors) {
       updatePayload.colors = updatePayload.colors as any
+    }
+    if (updatePayload.darkColors !== undefined) {
+      updatePayload.darkColors = updatePayload.darkColors as any
     }
 
     return await prisma.theme.update({
