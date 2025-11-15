@@ -97,7 +97,7 @@ export function ThemeSwitcher() {
 
           {/* Dropdown Menu */}
           {isOpen && (
-            <div className="absolute z-50 w-full mt-2 bg-card border-2 border-border rounded-xl shadow-elegant overflow-hidden animate-scale-in">
+            <div className="absolute z-50 w-full mt-2 bg-card border-2 border-border rounded-xl shadow-elegant overflow-hidden animate-scale-in opacity-100" style={{ backgroundColor: 'rgb(var(--color-card))' }}>
               {themes.map((theme) => (
                 <button
                   key={theme.id}
