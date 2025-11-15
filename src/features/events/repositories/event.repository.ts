@@ -3,10 +3,11 @@
  * Database operations for events
  */
 
-import { Event, Prisma } from '@prisma/client'
 import { BaseRepository } from '@/core/database/base.repository'
 import { prisma } from '@/core/database/prisma'
 import { EventFilters } from '../types/event.types'
+
+type Event = any
 
 export class EventRepository extends BaseRepository<Event> {
   protected model = prisma.event
@@ -34,8 +35,8 @@ export class EventRepository extends BaseRepository<Event> {
   }
 
   async findWithFilters(filters: EventFilters): Promise<Event[]> {
-    const where: Prisma.EventWhereInput = {}
-    const andConditions: Prisma.EventWhereInput[] = []
+    const where: any = {}
+    const andConditions: any[] = []
 
     if (filters.eventTypes && filters.eventTypes.length > 0) {
       where.eventType = { in: filters.eventTypes }

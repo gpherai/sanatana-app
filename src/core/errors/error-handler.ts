@@ -5,7 +5,7 @@
 
 import { NextResponse } from 'next/server'
 import { ZodError } from 'zod'
-import { Prisma } from '@prisma/client'
+import { PrismaClientKnownRequestError, PrismaClientValidationError } from '@prisma/client/runtime/library'
 import { AppError } from './AppError'
 import { ErrorCode } from './error-codes'
 import { isDevelopment } from '@/core/config/env'
@@ -37,11 +37,11 @@ export function handleApiError(error: unknown): NextResponse {
   }
 
   // Handle Prisma errors
-  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+  if (error instanceof PrismaClientKnownRequestError) {
     return handlePrismaError(error)
   }
 
-  if (error instanceof Prisma.PrismaClientValidationError) {
+  if (error instanceof PrismaClientValidationError) {
     return NextResponse.json(
       {
         success: false,
@@ -87,7 +87,7 @@ export function handleApiError(error: unknown): NextResponse {
   )
 }
 
-function handlePrismaError(error: Prisma.PrismaClientKnownRequestError): NextResponse {
+function handlePrismaError(error: PrismaClientKnownRequestError): NextResponse {
   switch (error.code) {
     case 'P2002': // Unique constraint violation
       return NextResponse.json(

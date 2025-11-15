@@ -4,6 +4,7 @@
  */
 
 import { Prisma } from '@prisma/client'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { prisma } from '@/core/database/prisma'
 import { AppError } from '@/core/errors/AppError'
 import { CreateThemeInput, UpdateThemeInput } from '../types/theme.types'
@@ -49,7 +50,7 @@ export class ThemeService {
   async createTheme(input: CreateThemeInput) {
     try {
       // Use transaction to ensure atomicity
-      return await prisma.$transaction(async (tx) => {
+      return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
         // If creating as active, deactivate all other themes
         if (input.isActive) {
           await tx.theme.updateMany({
@@ -61,14 +62,14 @@ export class ThemeService {
         return await tx.theme.create({
           data: {
             name: input.name,
-            colors: input.colors as unknown as Prisma.InputJsonObject,
-            darkColors: input.darkColors as unknown as Prisma.InputJsonObject | undefined,
+            colors: input.colors as any,
+            darkColors: input.darkColors as any,
             isActive: input.isActive ?? false
           }
         })
       })
     } catch (error) {
-      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
           throw AppError.conflict('A theme with this name already exists')
         }
@@ -82,7 +83,7 @@ export class ThemeService {
 
     try {
       // Use transaction to ensure atomicity
-      return await prisma.$transaction(async (tx) => {
+      return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
         const existingTheme = await tx.theme.findUnique({
           where: { id }
         })
@@ -103,13 +104,11 @@ export class ThemeService {
         }
 
         // Build update payload with proper types
-        const updatePayload: Prisma.ThemeUpdateInput = {
+        const updatePayload: any = {
           ...(updateData.name && { name: updateData.name }),
-          ...(updateData.colors && { colors: updateData.colors as unknown as Prisma.InputJsonObject }),
+          ...(updateData.colors && { colors: updateData.colors }),
           ...(updateData.darkColors !== undefined && {
-            darkColors: updateData.darkColors === null
-              ? Prisma.JsonNull
-              : (updateData.darkColors as unknown as Prisma.InputJsonObject)
+            darkColors: updateData.darkColors
           }),
           ...(updateData.isActive !== undefined && { isActive: updateData.isActive })
         }
@@ -121,7 +120,7 @@ export class ThemeService {
       })
     } catch (error) {
       if (error instanceof AppError) throw error
-      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
           throw AppError.conflict('A theme with this name already exists')
         }
@@ -156,7 +155,7 @@ export class ThemeService {
   async activateTheme(id: number) {
     try {
       // Use transaction to ensure atomicity
-      return await prisma.$transaction(async (tx) => {
+      return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
         const theme = await tx.theme.findUnique({
           where: { id }
         })

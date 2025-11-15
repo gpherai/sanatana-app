@@ -3,9 +3,10 @@
  * Database operations for categories
  */
 
-import { Category } from '@prisma/client'
 import { BaseRepository } from '@/core/database/base.repository'
 import { prisma } from '@/core/database/prisma'
+
+type Category = any
 
 export class CategoryRepository extends BaseRepository<Category> {
   protected model = prisma.category
