@@ -112,11 +112,13 @@ export function ThemeSwitcher() {
                     disabled:opacity-50 disabled:cursor-not-allowed
                   `}
                 >
-                  <span className="flex items-center justify-between">
-                    <span>{theme.name}</span>
-                    {currentTheme?.id === theme.id && (
-                      <span className="text-primary">✓</span>
+                  <span className="flex items-center gap-3">
+                    {currentTheme?.id === theme.id ? (
+                      <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+                    ) : (
+                      <span className="w-2 h-2 flex-shrink-0"></span>
                     )}
+                    <span>{theme.name}</span>
                   </span>
                 </button>
               ))}
