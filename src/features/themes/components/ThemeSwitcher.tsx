@@ -124,7 +124,7 @@ export function ThemeSwitcher() {
       </div>
 
       {/* Dark Mode Info Card */}
-      <div className="p-5 border-2 border-border rounded-xl bg-card">
+      <div className="p-5 border-2 border-border rounded-xl bg-card hover-lift">
         <div className="flex items-center gap-4">
           <span className="text-3xl" role="img" aria-label={isDark ? 'Moon' : 'Sun'}>
             {isDark ? '🌙' : '☀️'}
@@ -157,7 +157,7 @@ export function ThemeSwitcher() {
 
       {/* Color Preview */}
       {currentTheme && (
-        <div className="mt-2 p-5 border-2 border-border rounded-xl bg-card/50">
+        <div className="mt-2 p-5 border-2 border-border rounded-xl bg-card/50 hover-lift">
           <div className="text-sm font-bold text-foreground mb-4">
             Preview: {currentTheme.name} {isDark ? '(Dark)' : '(Light)'}
           </div>

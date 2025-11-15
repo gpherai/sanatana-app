@@ -53,7 +53,7 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+                    'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover-lift',
                     isActive(item.href)
                       ? 'bg-primary/15 text-foreground border-2 border-primary shadow-soft font-bold'
                       : 'text-foreground/70 hover:text-foreground hover:bg-muted/50 border-2 border-transparent'
@@ -99,7 +99,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                'px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200',
+                'px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 hover-lift',
                 isActive(item.href)
                   ? 'bg-primary/15 text-foreground border-2 border-primary shadow-soft font-bold'
                   : 'text-foreground/70 hover:text-foreground hover:bg-muted/50 border-2 border-transparent'

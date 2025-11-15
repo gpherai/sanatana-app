@@ -241,3 +241,13 @@ h6 {
 .shadow-hover:hover {
   box-shadow: 0 8px 40px rgb(var(--color-primary) / 0.15);
 }
+
+/* Hover lift effect - subtle upward movement with enhanced shadow */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
