@@ -55,31 +55,34 @@ export function ThemeSwitcher() {
 
       {/* Custom Styled Dropdown */}
       <div>
-        <label htmlFor="theme-select" className="block text-sm font-semibold text-foreground mb-2.5">
+        <label htmlFor="theme-select" className="block text-sm font-medium text-foreground mb-2.5">
           Color Theme
         </label>
-        <select
-          id="theme-select"
-          value={currentTheme?.id.toString() || ''}
-          onChange={(e) => handleThemeChange(e.target.value)}
-          disabled={isSwitching}
-          className="w-full px-5 py-3.5 text-base font-semibold text-foreground bg-card border-2 border-border rounded-xl transition-all appearance-none cursor-pointer
-            hover:border-primary/60 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
-            disabled:opacity-50 disabled:cursor-not-allowed
-            bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27rgb(var(--color-primary))%27 stroke-width=%272.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')]
-            bg-[length:1.5rem] bg-[right_1rem_center] bg-no-repeat pr-14"
-          style={{ fontFamily: 'inherit' }}
-        >
-          {themes.map((theme) => (
-            <option
-              key={theme.id}
-              value={theme.id.toString()}
-              className="text-foreground bg-card font-semibold py-3"
-            >
-              {theme.name}
-            </option>
-          ))}
-        </select>
+        <div className="relative">
+          <select
+            id="theme-select"
+            value={currentTheme?.id.toString() || ''}
+            onChange={(e) => handleThemeChange(e.target.value)}
+            disabled={isSwitching}
+            className="w-full px-4 py-3 text-base text-foreground bg-card border-2 border-border rounded-xl transition-all appearance-none cursor-pointer
+              hover:border-primary/60 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
+              disabled:opacity-50 disabled:cursor-not-allowed pr-10"
+          >
+            {themes.map((theme) => (
+              <option
+                key={theme.id}
+                value={theme.id.toString()}
+              >
+                {theme.name}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <svg className="h-5 w-5 text-muted-foreground" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </div>
+        </div>
       </div>
 
       {/* Dark Mode Toggle */}

@@ -32,7 +32,10 @@ export function validateThemeColors(colors: Partial<ThemeColors>): boolean {
     'mutedForeground',
     'card',
     'cardForeground',
-    'border'
+    'border',
+    'gradientFrom',
+    'gradientVia',
+    'gradientTo'
   ] as const
 
   for (const key of requiredKeys) {
@@ -72,6 +75,11 @@ export function applyThemeColors(colors: ThemeColors): void {
   root.style.setProperty('--color-card', colors.card)
   root.style.setProperty('--color-card-foreground', colors.cardForeground)
   root.style.setProperty('--color-border', colors.border)
+
+  // Apply gradient colors
+  root.style.setProperty('--gradient-from', colors.gradientFrom)
+  root.style.setProperty('--gradient-via', colors.gradientVia)
+  root.style.setProperty('--gradient-to', colors.gradientTo)
 }
 
 /**

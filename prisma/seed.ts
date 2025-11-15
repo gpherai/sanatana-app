@@ -222,6 +222,9 @@ async function main() {
           card: '255 255 255',
           cardForeground: '28 25 23',
           border: '231 229 228',
+          gradientFrom: '251 146 60', // Light orange
+          gradientVia: '249 115 22', // Medium orange
+          gradientTo: '234 88 12', // Deep orange
         },
         darkColors: {
           primary: '251 146 60', // Brighter orange for better visibility
@@ -234,6 +237,9 @@ async function main() {
           card: '32 32 32', // Slightly lighter card
           cardForeground: '250 250 250',
           border: '70 70 70', // More visible border
+          gradientFrom: '234 88 12', // Deep orange
+          gradientVia: '194 65 12', // Darker orange
+          gradientTo: '154 52 18', // Very dark orange
         },
         isActive: true,
       },
@@ -252,6 +258,9 @@ async function main() {
           card: '255 255 255',
           cardForeground: '31 25 43',
           border: '233 213 255',
+          gradientFrom: '167 139 250', // Light purple
+          gradientVia: '139 92 246', // Medium purple
+          gradientTo: '124 58 237', // Deep purple
         },
         darkColors: {
           primary: '167 139 250', // Brighter purple for better visibility
@@ -264,6 +273,9 @@ async function main() {
           card: '30 22 45', // Lighter card for better depth
           cardForeground: '245 240 255',
           border: '70 55 100', // More visible border
+          gradientFrom: '124 58 237', // Deep purple
+          gradientVia: '99 46 189', // Darker purple
+          gradientTo: '76 29 149', // Very dark purple
         },
         isActive: false,
       },
@@ -282,6 +294,9 @@ async function main() {
           card: '255 255 255',
           cardForeground: '37 23 31',
           border: '251 207 232',
+          gradientFrom: '244 114 182', // Light pink
+          gradientVia: '236 72 153', // Medium pink
+          gradientTo: '219 39 119', // Deep pink
         },
         darkColors: {
           primary: '244 114 182', // Brighter pink
@@ -294,6 +309,9 @@ async function main() {
           card: '42 25 35', // Lighter card
           cardForeground: '255 240 250',
           border: '85 55 72', // More visible border
+          gradientFrom: '219 39 119', // Deep pink
+          gradientVia: '190 24 93', // Darker pink
+          gradientTo: '157 23 77', // Very dark pink
         },
         isActive: false,
       },
@@ -312,6 +330,9 @@ async function main() {
           card: '255 255 255',
           cardForeground: '20 33 25',
           border: '187 247 208',
+          gradientFrom: '74 222 128', // Light green
+          gradientVia: '34 197 94', // Medium green
+          gradientTo: '22 163 74', // Deep green
         },
         darkColors: {
           primary: '74 222 128', // Brighter green
@@ -324,6 +345,9 @@ async function main() {
           card: '25 40 28', // Lighter card
           cardForeground: '240 255 244',
           border: '55 85 62', // More visible border
+          gradientFrom: '22 163 74', // Deep green
+          gradientVia: '21 128 61', // Darker green
+          gradientTo: '20 83 45', // Very dark green
         },
         isActive: false,
       },
@@ -342,6 +366,9 @@ async function main() {
           card: '255 255 255',
           cardForeground: '23 31 43',
           border: '186 230 253',
+          gradientFrom: '96 165 250', // Light blue
+          gradientVia: '59 130 246', // Medium blue
+          gradientTo: '37 99 235', // Deep blue
         },
         darkColors: {
           primary: '96 165 250', // Brighter blue
@@ -354,6 +381,9 @@ async function main() {
           card: '24 35 50', // Lighter card
           cardForeground: '240 248 255',
           border: '55 75 100', // More visible border
+          gradientFrom: '37 99 235', // Deep blue
+          gradientVia: '29 78 216', // Darker blue
+          gradientTo: '30 58 138', // Very dark blue
         },
         isActive: false,
       },
@@ -372,6 +402,9 @@ async function main() {
           card: '255 255 255',
           cardForeground: '41 34 20',
           border: '253 224 71',
+          gradientFrom: '252 211 77', // Light gold
+          gradientVia: '251 191 36', // Medium gold
+          gradientTo: '245 158 11', // Deep gold
         },
         darkColors: {
           primary: '252 211 77', // Brighter gold
@@ -384,6 +417,9 @@ async function main() {
           card: '42 35 20', // Lighter card
           cardForeground: '255 250 235',
           border: '80 70 42', // More visible border
+          gradientFrom: '245 158 11', // Deep gold
+          gradientVia: '202 138 4', // Darker gold
+          gradientTo: '161 98 7', // Very dark gold
         },
         isActive: false,
       },

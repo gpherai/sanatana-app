@@ -24,6 +24,9 @@ export interface ThemeColors {
   card: string
   cardForeground: string
   border: string
+  gradientFrom: string
+  gradientVia: string
+  gradientTo: string
 }
 
 export interface CreateThemeInput {
