@@ -1,0 +1,253 @@
+/**
+ * Global Styles
+ * Tailwind CSS v4 configuration with CSS variables
+ */
+
+@import "tailwindcss";
+
+@theme {
+  --font-family-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-serif: var(--font-playfair), 'Georgia', serif;
+}
+
+:root {
+  /* Neutral fallback colors - will be overridden by theme system */
+  --color-primary: 100 100 100;
+  --color-secondary: 120 120 120;
+  --color-accent: 140 140 140;
+
+  /* Neutral background */
+  --color-background: 255 255 255;
+  --color-foreground: 30 30 30;
+
+  /* Muted tones */
+  --color-muted: 245 245 245;
+  --color-muted-foreground: 115 115 115;
+
+  /* Card styling */
+  --color-card: 255 255 255;
+  --color-card-foreground: 30 30 30;
+
+  /* Borders */
+  --color-border: 230 230 230;
+
+  /* Gradient colors */
+  --gradient-from: 100 100 100;
+  --gradient-via: 120 120 120;
+  --gradient-to: 140 140 140;
+
+  --radius: 0.75rem;
+
+  /* Font families */
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: var(--font-playfair), 'Georgia', serif;
+
+  /* Smooth color transitions for theme switching */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode is now handled via JavaScript theme switching */
+
+* {
+  border-color: rgb(var(--color-border));
+}
+
+body {
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+  /* Smooth transitions for theme changes */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Elegant heading typography with Playfair Display */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1.125rem;
+}
+
+/* Apply smooth color transitions to all elements for theme switching */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(var(--color-muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-muted-foreground) / 0.5);
+  border-radius: var(--radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--color-muted-foreground) / 0.7);
+}
+
+/* Utility classes */
+@utility container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Focus visible styles */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(var(--color-primary)), 0 0 0 4px rgb(var(--color-primary) / 0.2);
+}
+
+/* Animation utilities */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-in-from-right-full {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-in {
+  animation-duration: 150ms;
+  animation-fill-mode: both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out forwards;
+}
+
+.slide-in-from-right-full {
+  animation-name: slide-in-from-right-full;
+}
+
+/* Gradient utilities */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, rgb(var(--gradient-from)), rgb(var(--gradient-via)), rgb(var(--gradient-to)));
+}
+
+.bg-gradient-shine {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Glass morphism effect - theme aware */
+.glass {
+  background: rgb(var(--color-card) / 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(var(--color-border) / 0.5);
+}
+
+/* Beautiful shadows */
+.shadow-soft {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-elegant {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-hover:hover {
+  box-shadow: 0 8px 40px rgb(var(--color-primary) / 0.15);
+}
+
+/* Hover lift effect - subtle upward movement with enhanced shadow */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}

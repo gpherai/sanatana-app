@@ -1,0 +1,94 @@
+// Prisma Schema for Dharma Calendar v0.3
+// Modern architecture with simplified structure
+// PostgreSQL 18 with native JSON support
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Event Categories (Festivals, Pujas, Vrats, etc.)
+model Category {
+  id               Int      @id @default(autoincrement())
+  name             String   @unique
+  description      String?
+  color            String   // Tailwind color name
+  icon             String   // Emoji or icon identifier
+  defaultEventType String   // Default event type for this category
+  events           Event[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([name])
+}
+
+// Main Events Table
+model Event {
+  id              Int       @id @default(autoincrement())
+  title           String
+  description     String?   @db.Text
+  eventType       String    // FESTIVAL, PUJA, VRAT, DEITY, AUSPICIOUS, OBSERVANCE, OTHER
+  startDate       DateTime
+  endDate         DateTime?
+  isAllDay        Boolean   @default(true)
+  color           String    // Tailwind color name
+  categoryId      Int?
+  category        Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  isRecurring     Boolean   @default(false)
+  recurrenceRule  String?   // iCal RRULE format
+  lunarDate       Json?     // { tithi, paksha, nakshatra, hinduMonth }
+  location        String?
+  reminder        Boolean   @default(false)
+  reminderMinutes Int?      // Minutes before event
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([startDate, endDate])
+  @@index([eventType])
+  @@index([categoryId])
+  @@index([isRecurring])
+}
+
+// User Preferences (Single User App)
+model UserPreferences {
+  id            Int      @id @default(autoincrement())
+  defaultView   String   @default("month") // month, week, day
+  showLunarInfo Boolean  @default(true)
+  showHolidays  Boolean  @default(true)
+  notifications Boolean  @default(false)
+  tempLocation  Json?    // { latitude, longitude, timezone, name }
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// Saved Locations for Lunar Calculations
+model SavedLocation {
+  id        Int      @id @default(autoincrement())
+  name      String
+  latitude  Float
+  longitude Float
+  timezone  String
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isDefault])
+}
+
+// Custom Themes
+model Theme {
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
+  colors     Json     // { primary, secondary, accent, background, foreground, ... }
+  darkColors Json?    // Optional dark mode variant colors
+  isActive   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([isActive])
+  @@index([name])
+}
