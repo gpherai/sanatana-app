@@ -111,7 +111,7 @@ export default function HomePage() {
                 return (
                   <div
                     key={event.id}
-                    className="group bg-card border border-border/50 rounded-2xl p-6 shadow-soft hover:shadow-elegant transition-all duration-300 cursor-pointer animate-fade-in hover-lift"
+                    className="group bg-card border border-border/50 rounded-2xl p-6 shadow-soft hover:shadow-elegant cursor-pointer animate-fade-in hover-lift"
                     style={{ animationDelay: `${index * 100}ms` }}
                     onClick={() => setSelectedEvent(event)}
                   >
