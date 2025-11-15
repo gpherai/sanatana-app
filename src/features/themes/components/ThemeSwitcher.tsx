@@ -106,14 +106,13 @@ export function ThemeSwitcher() {
                   disabled={isSwitching}
                   className={`w-full px-5 py-3.5 text-lg font-medium text-left transition-colors
                     ${currentTheme?.id === theme.id
-                      ? 'bg-primary text-white'
+                      ? 'text-foreground ring-2 ring-inset ring-primary'
                       : 'text-foreground hover:bg-muted'
                     }
                     disabled:opacity-50 disabled:cursor-not-allowed
                   `}
                   style={currentTheme?.id === theme.id ? {
-                    backgroundColor: `rgb(var(--color-primary))`,
-                    color: 'white'
+                    backgroundColor: `rgb(var(--color-primary) / 0.5)`,
                   } : undefined}
                 >
                   {theme.name}
