@@ -176,11 +176,11 @@ body {
   animation: shimmer 2s infinite;
 }
 
-/* Glass morphism effect */
+/* Glass morphism effect - theme aware */
 .glass {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgb(var(--color-card) / 0.8);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgb(var(--color-border) / 0.5);
 }
 
 /* Beautiful shadows */
@@ -197,5 +197,5 @@ body {
 }
 
 .shadow-hover:hover {
-  box-shadow: 0 8px 40px rgba(234, 88, 12, 0.15);
+  box-shadow: 0 8px 40px rgb(var(--color-primary) / 0.15);
 }

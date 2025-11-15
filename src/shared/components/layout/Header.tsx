@@ -29,7 +29,7 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/40 glass shadow-soft">
+    <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-card/95 backdrop-blur-md shadow-soft">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-10">
@@ -55,7 +55,7 @@ export function Header() {
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                     isActive(item.href)
-                      ? 'bg-orange-600 text-white shadow-soft'
+                      ? 'bg-primary text-white shadow-soft'
                       : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
                   )}
                 >
@@ -101,7 +101,7 @@ export function Header() {
               className={cn(
                 'px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200',
                 isActive(item.href)
-                  ? 'bg-orange-600 text-white shadow-soft'
+                  ? 'bg-primary text-white shadow-soft'
                   : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
               )}
             >
