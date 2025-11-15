@@ -16,7 +16,7 @@ export default function SettingsPage() {
         <h1 className="text-3xl font-bold text-foreground mb-8">Settings</h1>
 
         <div className="space-y-6">
-          <div className="bg-card border border-border rounded-lg p-6 hover-lift">
+          <div className="bg-card border border-border rounded-lg p-6">
             <h2 className="text-xl font-semibold text-foreground mb-4">Preferences</h2>
             <p className="text-muted-foreground mb-4">
               Settings functionality will be implemented in the next phase.
@@ -33,7 +33,7 @@ export default function SettingsPage() {
             </ul>
           </div>
 
-          <div className="bg-card border border-border rounded-lg p-6 hover-lift">
+          <div className="bg-card border border-border rounded-lg p-6">
             <h2 className="text-xl font-semibold text-foreground mb-4">Saved Locations</h2>
             <p className="text-muted-foreground">
               Manage your saved locations for accurate lunar calculations.
@@ -43,7 +43,7 @@ export default function SettingsPage() {
             </Button>
           </div>
 
-          <div className="bg-card border border-border rounded-lg p-6 hover-lift">
+          <div className="bg-card border border-border rounded-lg p-6">
             <h2 className="text-xl font-semibold text-foreground mb-4">Themes</h2>
             <ThemeSwitcher />
           </div>
