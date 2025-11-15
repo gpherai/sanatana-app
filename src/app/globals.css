@@ -6,30 +6,30 @@
 @import "tailwindcss";
 
 :root {
-  /* Warm, spiritual color palette inspired by dharma aesthetics */
-  --color-primary: 234 88 12; /* Warm orange - spirituality */
-  --color-secondary: 147 51 234; /* Deep purple - wisdom */
-  --color-accent: 236 72 153; /* Pink - devotion */
+  /* Neutral fallback colors - will be overridden by theme system */
+  --color-primary: 100 100 100;
+  --color-secondary: 120 120 120;
+  --color-accent: 140 140 140;
 
-  /* Soft, elegant background */
-  --color-background: 254 252 248; /* Warm off-white */
-  --color-foreground: 28 25 23;
+  /* Neutral background */
+  --color-background: 255 255 255;
+  --color-foreground: 30 30 30;
 
-  /* Muted tones for secondary elements */
-  --color-muted: 250 245 235; /* Soft cream */
-  --color-muted-foreground: 120 113 108;
+  /* Muted tones */
+  --color-muted: 245 245 245;
+  --color-muted-foreground: 115 115 115;
 
   /* Card styling */
   --color-card: 255 255 255;
-  --color-card-foreground: 28 25 23;
+  --color-card-foreground: 30 30 30;
 
-  /* Subtle borders */
-  --color-border: 231 229 228;
+  /* Borders */
+  --color-border: 230 230 230;
 
   /* Gradient colors */
-  --gradient-from: 251 146 60; /* Orange */
-  --gradient-via: 249 115 22; /* Deep orange */
-  --gradient-to: 234 88 12; /* Darker orange */
+  --gradient-from: 100 100 100;
+  --gradient-via: 120 120 120;
+  --gradient-to: 140 140 140;
 
   --radius: 0.75rem;
 

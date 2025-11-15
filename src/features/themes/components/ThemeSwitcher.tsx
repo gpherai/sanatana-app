@@ -106,7 +106,7 @@ export function ThemeSwitcher() {
                   disabled={isSwitching}
                   className={`w-full px-5 py-3.5 text-lg font-medium text-left transition-colors
                     ${currentTheme?.id === theme.id
-                      ? 'bg-primary/20 text-foreground font-bold'
+                      ? 'bg-primary text-white font-bold shadow-sm'
                       : 'text-foreground hover:bg-muted'
                     }
                     disabled:opacity-50 disabled:cursor-not-allowed

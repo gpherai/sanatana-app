@@ -40,15 +40,15 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     }
   }, [])
 
-  // Apply theme when active theme is loaded or dark mode changes
+  // Apply theme when active theme is loaded (initial load only)
   useEffect(() => {
-    if (activeTheme) {
+    if (activeTheme && !currentTheme) {
       setCurrentTheme(activeTheme)
       const colors = isDark && activeTheme.darkColors ? activeTheme.darkColors : activeTheme.colors
       applyThemeColors(colors)
       storeThemeId(activeTheme.id)
     }
-  }, [activeTheme, isDark])
+  }, [activeTheme, isDark, currentTheme])
 
   // Switch theme function
   const switchTheme = useCallback(async (themeId: number) => {
