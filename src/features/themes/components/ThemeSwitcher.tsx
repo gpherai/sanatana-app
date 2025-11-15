@@ -5,7 +5,7 @@
 
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
 import { useThemes } from '../hooks/useThemes'
 
@@ -13,14 +13,31 @@ export function ThemeSwitcher() {
   const { currentTheme, isDark, switchTheme, toggleDarkMode, isSwitching } = useTheme()
   const { data: themes, loading: loadingThemes } = useThemes()
   const [error, setError] = useState<string | null>(null)
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const handleThemeChange = async (themeId: string) => {
-    if (!themeId) return
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
 
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
+    }
+  }, [isOpen])
+
+  const handleThemeChange = async (themeId: number) => {
     setError(null)
+    setIsOpen(false)
 
     try {
-      await switchTheme(parseInt(themeId, 10))
+      await switchTheme(themeId)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to switch theme')
     }
@@ -54,40 +71,55 @@ export function ThemeSwitcher() {
       </div>
 
       {/* Custom Styled Dropdown */}
-      <div>
-        <label htmlFor="theme-select" className="block text-sm font-medium text-foreground mb-2.5">
+      <div className="relative" ref={dropdownRef}>
+        <label className="block text-sm font-medium text-foreground mb-2.5">
           Color Theme
         </label>
         <div className="relative">
-          <select
-            id="theme-select"
-            value={currentTheme?.id.toString() || ''}
-            onChange={(e) => handleThemeChange(e.target.value)}
+          {/* Dropdown Button */}
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
             disabled={isSwitching}
-            style={{
-              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-              WebkitFontSmoothing: 'antialiased',
-              MozOsxFontSmoothing: 'grayscale'
-            }}
-            className="w-full px-5 py-3.5 text-lg font-medium text-foreground bg-card border-2 border-border rounded-xl transition-all appearance-none cursor-pointer
+            className="w-full px-5 py-3.5 text-lg font-medium text-foreground bg-card border-2 border-border rounded-xl transition-all cursor-pointer text-left
               hover:border-primary/60 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
-              disabled:opacity-50 disabled:cursor-not-allowed pr-12"
+              disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-between"
           >
-            {themes.map((theme) => (
-              <option
-                key={theme.id}
-                value={theme.id.toString()}
-                className="py-3 text-lg font-medium"
-              >
-                {theme.name}
-              </option>
-            ))}
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
-            <svg className="h-6 w-6 text-muted-foreground" viewBox="0 0 20 20" fill="currentColor">
+            <span>{currentTheme?.name || 'Select a theme'}</span>
+            <svg
+              className={`h-6 w-6 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`}
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
               <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
-          </div>
+          </button>
+
+          {/* Dropdown Menu */}
+          {isOpen && (
+            <div className="absolute z-50 w-full mt-2 bg-card border-2 border-border rounded-xl shadow-elegant overflow-hidden animate-scale-in">
+              {themes.map((theme) => (
+                <button
+                  key={theme.id}
+                  type="button"
+                  onClick={() => handleThemeChange(theme.id)}
+                  disabled={isSwitching}
+                  className={`w-full px-5 py-3.5 text-lg font-medium text-left transition-colors
+                    ${currentTheme?.id === theme.id
+                      ? 'bg-primary text-white'
+                      : 'text-foreground hover:bg-muted'
+                    }
+                    disabled:opacity-50 disabled:cursor-not-allowed
+                  `}
+                >
+                  {theme.name}
+                  {currentTheme?.id === theme.id && (
+                    <span className="ml-2">✓</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
