@@ -14,7 +14,7 @@ export class ThemeService {
       return await prisma.theme.findMany({
         orderBy: { name: 'asc' }
       })
-    } catch (error) {
+    } catch {
       throw AppError.internal('Failed to fetch themes')
     }
   }
@@ -24,7 +24,7 @@ export class ThemeService {
       return await prisma.theme.findFirst({
         where: { isActive: true }
       })
-    } catch (error) {
+    } catch {
       throw AppError.internal('Failed to fetch active theme')
     }
   }

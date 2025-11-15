@@ -4,7 +4,7 @@
  * This is a simplified implementation - in production, use a specialized astronomy library
  */
 
-import { LunarPhase, LUNAR_PHASES, TITHIS, NAKSHATRAS, PAKSHAS, HINDU_MONTHS } from '@/core/config/constants'
+import { LunarPhase, TITHIS, NAKSHATRAS, PAKSHAS, HINDU_MONTHS } from '@/core/config/constants'
 import { LunarData, MoonCalculationInput } from '../types/lunar.types'
 import { AppError } from '@/core/errors/AppError'
 

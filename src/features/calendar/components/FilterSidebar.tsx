@@ -10,7 +10,6 @@ import { Button } from '@/shared/components/ui/Button'
 import { Input } from '@/shared/components/ui/Input'
 import { EVENT_TYPES, EventType } from '@/core/config/constants'
 import { EventFilters } from '@/features/events/types/event.types'
-import { useDebounce } from '@/shared/hooks'
 import { useCategories } from '@/features/categories/hooks/useCategories'
 
 interface FilterSidebarProps {
@@ -21,7 +20,6 @@ interface FilterSidebarProps {
 
 export function FilterSidebar({ filters, onFiltersChange, onClose }: FilterSidebarProps) {
   const [searchQuery, setSearchQuery] = useState(filters.searchQuery || '')
-  const debouncedSearch = useDebounce(searchQuery, 300)
   const { data: categories, loading: categoriesLoading } = useCategories()
 
   const handleEventTypeToggle = (eventType: EventType) => {

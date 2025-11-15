@@ -8,7 +8,7 @@
 import { useState } from 'react'
 import { Button } from '@/shared/components/ui/Button'
 import { Event } from '@/features/events/types/event.types'
-import { toDisplayDate, getStartOfMonth, getEndOfMonth, getDateRange, isToday } from '@/shared/utils/date.utils'
+import { getStartOfMonth, getEndOfMonth, getDateRange, isToday } from '@/shared/utils/date.utils'
 import { cn } from '@/shared/utils/cn'
 import { EVENT_COLORS } from '@/core/config/constants'
 
