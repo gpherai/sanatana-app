@@ -61,8 +61,8 @@ export class ThemeService {
         return await tx.theme.create({
           data: {
             name: input.name,
-            colors: input.colors as Prisma.InputJsonObject,
-            darkColors: input.darkColors as Prisma.InputJsonObject | undefined,
+            colors: input.colors as unknown as Prisma.InputJsonObject,
+            darkColors: input.darkColors as unknown as Prisma.InputJsonObject | undefined,
             isActive: input.isActive ?? false
           }
         })
@@ -105,9 +105,11 @@ export class ThemeService {
         // Build update payload with proper types
         const updatePayload: Prisma.ThemeUpdateInput = {
           ...(updateData.name && { name: updateData.name }),
-          ...(updateData.colors && { colors: updateData.colors as Prisma.InputJsonObject }),
+          ...(updateData.colors && { colors: updateData.colors as unknown as Prisma.InputJsonObject }),
           ...(updateData.darkColors !== undefined && {
-            darkColors: updateData.darkColors as Prisma.InputJsonObject | null
+            darkColors: updateData.darkColors === null
+              ? Prisma.JsonNull
+              : (updateData.darkColors as unknown as Prisma.InputJsonObject)
           }),
           ...(updateData.isActive !== undefined && { isActive: updateData.isActive })
         }

@@ -10,7 +10,7 @@ import { useTheme } from '../context/ThemeContext'
 import { useThemes } from '../hooks/useThemes'
 
 export function ThemeSwitcher() {
-  const { currentTheme, isDark, switchTheme, toggleDarkMode, isSwitching } = useTheme()
+  const { currentTheme, isDark, switchTheme, isSwitching } = useTheme()
   const { data: themes, loading: loadingThemes } = useThemes()
   const [error, setError] = useState<string | null>(null)
   const [isOpen, setIsOpen] = useState(false)
