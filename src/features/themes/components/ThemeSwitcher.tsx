@@ -69,11 +69,22 @@ export function ThemeSwitcher() {
       />
 
       <div
+        role="button"
+        tabIndex={0}
         onClick={toggleDarkMode}
-        className="flex items-center justify-between p-4 border border-border rounded-lg bg-card cursor-pointer hover:bg-muted/50 transition-colors"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            toggleDarkMode()
+          }
+        }}
+        className="flex items-center justify-between p-4 border border-border rounded-lg bg-card cursor-pointer hover:bg-muted/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        aria-label={`Toggle dark mode. Currently ${isDark ? 'dark' : 'light'} mode`}
       >
         <div className="flex items-center gap-3">
-          <span className="text-2xl">{isDark ? '🌙' : '☀️'}</span>
+          <span className="text-2xl" role="img" aria-label={isDark ? 'Moon' : 'Sun'}>
+            {isDark ? '🌙' : '☀️'}
+          </span>
           <div>
             <div className="text-sm font-medium text-foreground">
               {isDark ? 'Dark Mode' : 'Light Mode'}
@@ -87,7 +98,7 @@ export function ThemeSwitcher() {
           className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
             isDark ? 'bg-primary' : 'bg-muted'
           }`}
-          aria-label="Toggle dark mode"
+          aria-hidden="true"
         >
           <span
             className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${

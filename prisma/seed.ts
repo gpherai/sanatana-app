@@ -224,16 +224,16 @@ async function main() {
           border: '231 229 228',
         },
         darkColors: {
-          primary: '249 115 22', // Brighter orange for dark
+          primary: '251 146 60', // Brighter orange for better visibility
           secondary: '168 85 247', // Lighter purple
           accent: '244 114 182', // Lighter pink
           background: '23 23 23', // Deep dark
           foreground: '250 250 250',
-          muted: '38 38 38',
-          mutedForeground: '161 161 161',
-          card: '30 30 30',
+          muted: '40 40 40', // Slightly lighter
+          mutedForeground: '180 180 180', // Lighter for WCAG AA compliance
+          card: '32 32 32', // Slightly lighter card
           cardForeground: '250 250 250',
-          border: '64 64 64',
+          border: '70 70 70', // More visible border
         },
         isActive: true,
       },
@@ -254,16 +254,16 @@ async function main() {
           border: '233 213 255',
         },
         darkColors: {
-          primary: '147 51 234', // Brighter purple
+          primary: '167 139 250', // Brighter purple for better visibility
           secondary: '244 114 182', // Lighter pink
           accent: '251 146 60', // Lighter orange
           background: '20 15 30', // Deep purple-tinted dark
           foreground: '245 240 255',
-          muted: '35 25 50',
-          mutedForeground: '150 140 170',
-          card: '28 20 40',
+          muted: '40 30 55', // Slightly lighter for better differentiation
+          mutedForeground: '190 180 210', // Much lighter for WCAG AA compliance (4.5:1+)
+          card: '30 22 45', // Lighter card for better depth
           cardForeground: '245 240 255',
-          border: '60 45 90',
+          border: '70 55 100', // More visible border
         },
         isActive: false,
       },
@@ -289,11 +289,11 @@ async function main() {
           accent: '253 186 116', // Lighter peach
           background: '30 15 25', // Deep pink-tinted dark
           foreground: '255 240 250',
-          muted: '45 25 38',
-          mutedForeground: '180 140 160',
-          card: '38 20 32',
+          muted: '50 30 42', // Lighter muted
+          mutedForeground: '200 165 185', // Much lighter for WCAG AA compliance
+          card: '42 25 35', // Lighter card
           cardForeground: '255 240 250',
-          border: '75 45 65',
+          border: '85 55 72', // More visible border
         },
         isActive: false,
       },
@@ -319,11 +319,11 @@ async function main() {
           accent: '252 211 77', // Lighter gold
           background: '15 25 18', // Deep green-tinted dark
           foreground: '240 255 244',
-          muted: '25 40 30',
-          mutedForeground: '140 180 155',
-          card: '20 32 24',
+          muted: '30 48 35', // Lighter muted
+          mutedForeground: '170 200 180', // Much lighter for WCAG AA compliance
+          card: '25 40 28', // Lighter card
           cardForeground: '240 255 244',
-          border: '45 70 52',
+          border: '55 85 62', // More visible border
         },
         isActive: false,
       },
@@ -349,11 +349,11 @@ async function main() {
           accent: '34 211 238', // Lighter cyan
           background: '15 20 30', // Deep blue-tinted dark
           foreground: '240 248 255',
-          muted: '25 35 50',
-          mutedForeground: '140 160 190',
-          card: '20 28 40',
+          muted: '30 42 58', // Lighter muted
+          mutedForeground: '170 185 210', // Much lighter for WCAG AA compliance
+          card: '24 35 50', // Lighter card
           cardForeground: '240 248 255',
-          border: '45 60 85',
+          border: '55 75 100', // More visible border
         },
         isActive: false,
       },
@@ -379,11 +379,11 @@ async function main() {
           accent: '248 113 113', // Lighter red
           background: '30 25 15', // Deep warm dark
           foreground: '255 250 235',
-          muted: '45 38 22',
-          mutedForeground: '180 160 120',
-          card: '38 32 18',
+          muted: '50 42 25', // Lighter muted
+          mutedForeground: '200 180 140', // Much lighter for WCAG AA compliance
+          card: '42 35 20', // Lighter card
           cardForeground: '255 250 235',
-          border: '70 60 35',
+          border: '80 70 42', // More visible border
         },
         isActive: false,
       },

@@ -59,13 +59,23 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
         method: 'POST'
       })
 
+      if (!response.ok) {
+        const errorText = await response.text()
+        throw new Error(`Failed to switch theme: ${response.status} ${errorText}`)
+      }
+
       const result = await response.json()
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.error?.message || 'Failed to switch theme')
+      if (!result.success) {
+        const errorMessage = result.error?.message || result.error || 'Unknown error occurred'
+        throw new Error(typeof errorMessage === 'string' ? errorMessage : 'Failed to switch theme')
       }
 
       const newTheme = result.data as Theme
+
+      if (!newTheme || !newTheme.colors) {
+        throw new Error('Invalid theme data received from server')
+      }
 
       // Optimistic update - apply theme immediately
       setCurrentTheme(newTheme)
@@ -73,8 +83,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       applyThemeColors(colors)
       storeThemeId(newTheme.id)
     } catch (err) {
-      console.error('Failed to switch theme:', err)
-      throw err
+      const errorMessage = err instanceof Error ? err.message : 'Failed to switch theme'
+      console.error('Failed to switch theme:', errorMessage, err)
+      throw new Error(errorMessage)
     } finally {
       setIsSwitching(false)
     }
