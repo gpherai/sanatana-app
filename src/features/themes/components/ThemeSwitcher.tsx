@@ -64,21 +64,27 @@ export function ThemeSwitcher() {
             value={currentTheme?.id.toString() || ''}
             onChange={(e) => handleThemeChange(e.target.value)}
             disabled={isSwitching}
-            className="w-full px-4 py-3 text-base text-foreground bg-card border-2 border-border rounded-xl transition-all appearance-none cursor-pointer
-              hover:border-primary/60 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
-              disabled:opacity-50 disabled:cursor-not-allowed pr-10"
+            style={{
+              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale'
+            }}
+            className="w-full px-5 py-3.5 text-lg font-medium text-foreground bg-card border-2 border-border rounded-xl transition-all appearance-none cursor-pointer
+              hover:border-primary/60 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
+              disabled:opacity-50 disabled:cursor-not-allowed pr-12"
           >
             {themes.map((theme) => (
               <option
                 key={theme.id}
                 value={theme.id.toString()}
+                className="py-3 text-lg font-medium"
               >
                 {theme.name}
               </option>
             ))}
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <svg className="h-5 w-5 text-muted-foreground" viewBox="0 0 20 20" fill="currentColor">
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
+            <svg className="h-6 w-6 text-muted-foreground" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
           </div>
