@@ -106,11 +106,15 @@ export function ThemeSwitcher() {
                   disabled={isSwitching}
                   className={`w-full px-5 py-3.5 text-lg font-medium text-left transition-colors
                     ${currentTheme?.id === theme.id
-                      ? 'bg-primary/30 text-foreground font-bold border-l-4 border-primary'
-                      : 'text-foreground hover:bg-muted border-l-4 border-transparent'
+                      ? 'bg-primary text-white'
+                      : 'text-foreground hover:bg-muted'
                     }
                     disabled:opacity-50 disabled:cursor-not-allowed
                   `}
+                  style={currentTheme?.id === theme.id ? {
+                    backgroundColor: `rgb(var(--color-primary))`,
+                    color: 'white'
+                  } : undefined}
                 >
                   {theme.name}
                 </button>
@@ -120,20 +124,8 @@ export function ThemeSwitcher() {
         </div>
       </div>
 
-      {/* Dark Mode Toggle */}
-      <div
-        role="button"
-        tabIndex={0}
-        onClick={toggleDarkMode}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            toggleDarkMode()
-          }
-        }}
-        className="flex items-center justify-between p-4 border-2 border-border rounded-xl bg-card cursor-pointer hover:border-primary/60 hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-        aria-label={`Toggle dark mode. Currently ${isDark ? 'dark' : 'light'} mode`}
-      >
+      {/* Dark Mode Info Card */}
+      <div className="p-5 border-2 border-border rounded-xl bg-card">
         <div className="flex items-center gap-4">
           <span className="text-3xl" role="img" aria-label={isDark ? 'Moon' : 'Sun'}>
             {isDark ? '🌙' : '☀️'}
@@ -145,19 +137,10 @@ export function ThemeSwitcher() {
             <div className="text-sm text-muted-foreground">
               {isDark ? 'Easier on your eyes' : 'Bright and vibrant'}
             </div>
+            <div className="text-xs text-muted-foreground mt-1">
+              Use toggle in header to switch modes
+            </div>
           </div>
-        </div>
-        <div
-          className={`relative inline-flex h-7 w-13 items-center rounded-full transition-colors ${
-            isDark ? 'bg-primary' : 'bg-border'
-          }`}
-          aria-hidden="true"
-        >
-          <span
-            className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-md transition-transform ${
-              isDark ? 'translate-x-7' : 'translate-x-1'
-            }`}
-          />
         </div>
       </div>
 
