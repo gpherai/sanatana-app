@@ -104,18 +104,20 @@ export function ThemeSwitcher() {
                   type="button"
                   onClick={() => handleThemeChange(theme.id)}
                   disabled={isSwitching}
-                  className={`w-full px-5 py-3.5 text-lg font-medium text-left transition-colors
+                  className={`w-full px-5 py-3.5 text-lg font-medium text-left transition-colors border-l-4
                     ${currentTheme?.id === theme.id
-                      ? 'bg-primary text-white'
-                      : 'text-foreground hover:bg-muted'
+                      ? 'border-primary bg-primary/10 text-foreground font-bold'
+                      : 'border-transparent text-foreground hover:bg-muted hover:border-primary/30'
                     }
                     disabled:opacity-50 disabled:cursor-not-allowed
                   `}
                 >
-                  {theme.name}
-                  {currentTheme?.id === theme.id && (
-                    <span className="ml-2">✓</span>
-                  )}
+                  <span className="flex items-center justify-between">
+                    <span>{theme.name}</span>
+                    {currentTheme?.id === theme.id && (
+                      <span className="text-primary">✓</span>
+                    )}
+                  </span>
                 </button>
               ))}
             </div>
